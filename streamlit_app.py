@@ -175,7 +175,7 @@ section.main-container {
 
 .hero h1 {
     margin: 0;
-    font-size: clamp(3.2rem, 7.8vw, 7.6rem);
+    font-size: clamp(2.4rem, 5.8vw, 5.4rem);
     line-height: .88;
     letter-spacing: -.08em;
     font-weight: 900;
