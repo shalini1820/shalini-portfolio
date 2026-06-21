@@ -792,33 +792,33 @@ HTML = f"""
     <p class="section-subtitle">Each case focuses on a concrete engineering contribution instead of repeating a standard job description.</p>
   </div>
   <div class="case-grid">
-    <article class="case-card">
+    <div class="case-card">
       <div class="case-top"><span class="case-number">Case Study 01</span><div class="tags"><span class="tag">SAP Hybris</span><span class="tag">Cron Jobs</span><span class="tag">Impex</span></div></div>
       <h3>B2B SAP Commerce Automation Suite</h3>
       <p>Designed SAP Hybris B2B customizations, Backoffice customizations, Impex-based migration scripts and cron jobs to automate enterprise workflows.</p>
       <ul class="impact-list"><li>Reduced manual operations by 60%</li><li>Improved batch processing from 18 minutes to 4 minutes</li><li>Supported Related SBU, SBU Offboarding, Project Hornet and Warranty Claims</li></ul>
-    </article>
+    </div>
 
-    <article class="case-card">
+    <div class="case-card">
       <div class="case-top"><span class="case-number">Case Study 02</span><div class="tags"><span class="tag">OCC</span><span class="tag">Spring MVC</span><span class="tag">CCv2</span></div></div>
       <h3>Headless B2B Portal APIs</h3>
       <p>Built and customized OCC web services and RESTful APIs in SAP Commerce Cloud to connect B2B portal functionality with external systems.</p>
       <ul class="impact-list"><li>Enabled smoother B2B portal functionality</li><li>Supported self-service access for 450+ users</li><li>Contributed to a 12-point increase in Customer Portal satisfaction</li></ul>
-    </article>
+    </div>
 
-    <article class="case-card">
+    <div class="case-card">
       <div class="case-top"><span class="case-number">Case Study 03</span><div class="tags"><span class="tag">RBAC</span><span class="tag">PII Masking</span><span class="tag">Security</span></div></div>
       <h3>Enterprise Data Protection Controls</h3>
       <p>Architected data-protection controls for enterprise workflows, including role-based access, sensitive-data masking and row-level restrictions.</p>
       <ul class="impact-list"><li>Reduced audit findings by 70%</li><li>Aligned platform controls with SAP Commerce security practices</li><li>Improved handling of sensitive enterprise data</li></ul>
-    </article>
+    </div>
 
-    <article class="case-card">
+    <div class="case-card">
       <div class="case-top"><span class="case-number">Case Study 04</span><div class="tags"><span class="tag">Performance</span><span class="tag">Production</span><span class="tag">Reliability</span></div></div>
       <h3>Customer Portal Performance & Reliability</h3>
       <p>Diagnosed critical P1/P2 incidents, improved backend performance and collaborated with Product, QA and DevOps to keep releases on track.</p>
       <ul class="impact-list"><li>Maintained 99.95% service availability</li><li>Improved p95 API latency by 28%</li><li>Achieved 1.8-hour MTTR for critical incidents</li></ul>
-    </article>
+    </div>
   </div>
 </section>
 
@@ -889,9 +889,15 @@ HTML = f"""
 </div>
 """
 
-st.markdown(CSS, unsafe_allow_html=True)
+def render_html(markup: str) -> None:
+    # Streamlit's Markdown engine treats 4-space indented HTML as a code block.
+    # Left-stripping each line prevents raw tags from appearing on the live site.
+    cleaned = "\n".join(line.lstrip() for line in markup.splitlines() if line.strip())
+    st.markdown(cleaned, unsafe_allow_html=True)
+
+render_html(CSS)
 
 if not RESUME_PATH.exists():
     st.warning("Resume PDF not found. Add it at assets/Shalini_Resume.pdf to enable the download buttons.")
 
-st.markdown(HTML, unsafe_allow_html=True)
+render_html(HTML)
