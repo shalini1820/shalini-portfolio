@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shalini — SAP Commerce Cloud Developer</title>
+  <meta name="description" content="SAP Hybris / SAP Commerce Cloud Backend Developer with 3+ years of enterprise B2B experience at Collins Aerospace, Bangalore.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #030C1B;
+      --bg-2:     #060F20;
+      --surface:  #091526;
+      --card:     #0C1A30;
+      --card-2:   #0F2040;
+      --border:   rgba(59,130,246,0.13);
+      --border-h: rgba(59,130,246,0.35);
+      --text:     #D9EEFF;
+      --muted:    #5C7A96;
+      --dim:      #8BAFC8;
+      --blue:     #3B82F6;
+      --blue-l:   #60A5FA;
+      --cyan:     #06B6D4;
+      --purple:   #A78BFA;
+      --green:    #34D399;
+      --amber:    #FBBF24;
+      --font:     'Inter', system-ui, sans-serif;
+      --mono:     'JetBrains Mono', monospace;
+      --r:        14px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(to bottom, var(--blue), var(--cyan)); border-radius: 3px; }
+
+    /* ──────────────────────  NAV  ────────────────────── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2.5rem; height: 64px;
+      transition: background 0.4s, border-bottom 0.4s, backdrop-filter 0.4s;
+    }
+    .nav.scrolled {
+      background: rgba(3,12,27,0.85);
+      backdrop-filter: blur(20px) saturate(1.5);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-brand {
+      font-size: 1.1rem; font-weight: 800; letter-spacing: 0.04em;
+      background: linear-gradient(100deg, var(--blue-l), var(--cyan));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none; color: var(--muted); font-size: 0.85rem;
+      font-weight: 500; letter-spacing: 0.04em; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--blue-l); }
+
+    /* ──────────────────────  HERO  ────────────────────── */
+    .hero {
+      position: relative; min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 100px 2.5rem 70px; overflow: hidden;
+    }
+
+    /* animated orbs */
+    .orb {
+      position: absolute; border-radius: 50%; filter: blur(90px);
+      pointer-events: none;
+    }
+    .orb-1 {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle at 50% 50%, rgba(59,130,246,0.22), transparent 70%);
+      top: -150px; right: 5%; animation: drift1 12s ease-in-out infinite;
+    }
+    .orb-2 {
+      width: 450px; height: 450px;
+      background: radial-gradient(circle at 50% 50%, rgba(6,182,212,0.18), transparent 70%);
+      bottom: -80px; right: 28%; animation: drift2 15s ease-in-out infinite;
+    }
+    .orb-3 {
+      width: 380px; height: 380px;
+      background: radial-gradient(circle at 50% 50%, rgba(167,139,250,0.15), transparent 70%);
+      top: 15%; left: -80px; animation: drift3 18s ease-in-out infinite;
+    }
+    @keyframes drift1 { 0%,100%{transform:translate(0,0) scale(1)} 40%{transform:translate(-40px,30px) scale(1.08)} 70%{transform:translate(25px,-20px) scale(0.94)} }
+    @keyframes drift2 { 0%,100%{transform:translate(0,0)} 35%{transform:translate(50px,-40px) scale(1.06)} 70%{transform:translate(-30px,25px) scale(0.96)} }
+    @keyframes drift3 { 0%,100%{transform:translate(0,0) scale(1)} 45%{transform:translate(35px,35px) scale(1.04)} 75%{transform:translate(-20px,-30px) scale(0.97)} }
+
+    /* dot grid overlay */
+    .hero-dots {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: radial-gradient(circle, rgba(59,130,246,0.12) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: radial-gradient(ellipse 90% 90% at 50% 50%, black 30%, transparent 80%);
+    }
+
+    .hero-inner {
+      position: relative; z-index: 1;
+      display: grid; grid-template-columns: 1fr 360px;
+      gap: 4rem; max-width: 1180px; margin: 0 auto; width: 100%;
+      align-items: center;
+    }
+
+    .eyebrow {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--cyan);
+      margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .eyebrow::before {
+      content: ''; width: 28px; height: 2px;
+      background: linear-gradient(90deg, var(--cyan), transparent);
+      flex-shrink: 0;
+    }
+
+    .hero-name {
+      font-size: clamp(3.5rem, 8vw, 6rem); font-weight: 900;
+      line-height: 0.95; letter-spacing: -0.04em; margin-bottom: 1.25rem;
+      background: linear-gradient(135deg, #ffffff 0%, #b8d9ff 50%, var(--cyan) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    .hero-role {
+      font-family: var(--mono); font-size: clamp(0.9rem, 2vw, 1.15rem);
+      color: var(--blue-l); margin-bottom: 1.75rem; min-height: 1.6em;
+      display: flex; align-items: center; gap: 2px;
+    }
+    .cursor {
+      display: inline-block; width: 2px; height: 1.1em;
+      background: var(--cyan); margin-left: 1px;
+      animation: blink 1s step-end infinite; flex-shrink: 0;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    .hero-summary {
+      font-size: 1.05rem; color: var(--dim); line-height: 1.8;
+      max-width: 550px; margin-bottom: 2.5rem;
+    }
+
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.8rem 1.8rem; border-radius: 8px; font-size: 0.875rem;
+      font-weight: 600; text-decoration: none; letter-spacing: 0.03em;
+      transition: transform 0.22s, box-shadow 0.22s, background 0.22s, border-color 0.22s;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      color: #fff; box-shadow: 0 0 28px rgba(59,130,246,0.35);
+    }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 0 48px rgba(59,130,246,0.5); }
+    .btn-ghost {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border); color: var(--text);
+      backdrop-filter: blur(8px);
+    }
+    .btn-ghost:hover { border-color: var(--blue); background: rgba(59,130,246,0.09); transform: translateY(-3px); }
+
+    /* hero side panel */
+    .hero-panel {
+      background: rgba(9,21,38,0.7);
+      border: 1px solid var(--border); border-radius: 20px;
+      padding: 1.75rem; backdrop-filter: blur(24px);
+      box-shadow: 0 0 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);
+    }
+    .panel-loc {
+      font-size: 0.78rem; color: var(--muted); text-align: center;
+      margin-bottom: 1.5rem; padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center; gap: 0.45rem;
+    }
+    .panel-loc svg { flex-shrink: 0; }
+
+    .stats-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+      background: var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 1.5rem;
+    }
+    .stat-cell {
+      background: var(--card); padding: 1.15rem 0.9rem; text-align: center;
+    }
+    .stat-val {
+      font-size: 1.6rem; font-weight: 900; letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #fff, var(--cyan));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      display: block; line-height: 1; margin-bottom: 0.3rem;
+    }
+    .stat-lbl {
+      font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted);
+    }
+
+    .open-badge {
+      display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+      padding: 0.65rem 1rem;
+      background: rgba(52,211,153,0.08); border: 1px solid rgba(52,211,153,0.25);
+      border-radius: 8px; font-size: 0.78rem; color: var(--green); font-weight: 500;
+    }
+    .pulse-dot {
+      width: 8px; height: 8px; background: var(--green); border-radius: 50%;
+      animation: pulse-g 2s ease-in-out infinite;
+    }
+    @keyframes pulse-g {
+      0%,100%{box-shadow:0 0 0 0 rgba(52,211,153,0.5); opacity:1}
+      50%{box-shadow:0 0 0 7px rgba(52,211,153,0); opacity:0.8}
+    }
+
+    /* ──────────────────────  SHARED LAYOUT  ────────────────────── */
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 2.5rem; }
+    .section { padding: 6rem 0; }
+    .section-label {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--cyan); margin-bottom: 0.65rem;
+    }
+    .section-title {
+      font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 800;
+      letter-spacing: -0.025em; line-height: 1.1; margin-bottom: 3rem;
+    }
+    .hr { height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); }
+
+    /* ──────────────────────  INTRO STRIP  ────────────────────── */
+    .intro-strip {
+      padding: 3.5rem 0; background: var(--bg-2);
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    }
+    .intro-strip p {
+      font-size: 1.2rem; line-height: 1.8; color: var(--dim); max-width: 780px;
+    }
+    .intro-strip strong { color: var(--text); font-weight: 600; }
+
+    /* ──────────────────────  PROJECTS  ────────────────────── */
+    .project-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem;
+    }
+    .project-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 1.75rem;
+      position: relative; overflow: hidden; transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    }
+    .project-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--blue), var(--cyan));
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .project-card::after {
+      content: ''; position: absolute; bottom: 0; right: 0;
+      width: 120px; height: 120px;
+      background: radial-gradient(circle at 100% 100%, rgba(59,130,246,0.08), transparent 70%);
+      pointer-events: none;
+    }
+    .project-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--border-h);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.35), 0 0 40px rgba(59,130,246,0.07);
+    }
+    .project-card:hover::before { opacity: 1; }
+
+    .tag-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
+    .tag {
+      font-size: 0.66rem; font-family: var(--mono); font-weight: 500; color: var(--cyan);
+      background: rgba(6,182,212,0.09); border: 1px solid rgba(6,182,212,0.2);
+      padding: 0.2rem 0.55rem; border-radius: 4px; letter-spacing: 0.03em;
+    }
+    .project-card h3 {
+      font-size: 1.1rem; font-weight: 700; letter-spacing: -0.01em;
+      margin-bottom: 0.65rem;
+    }
+    .project-card p {
+      font-size: 0.875rem; color: var(--muted); line-height: 1.65; margin-bottom: 1.25rem;
+    }
+    .impact-list { list-style: none; }
+    .impact-list li {
+      font-size: 0.84rem; color: var(--dim);
+      padding: 0.45rem 0 0.45rem 1.35rem; position: relative;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .impact-list li:last-child { border-bottom: none; }
+    .impact-list li::before {
+      content: '↗'; position: absolute; left: 0; color: var(--green);
+      font-size: 0.75rem; font-weight: 700; top: 0.5rem;
+    }
+
+    /* ──────────────────────  SKILLS  ────────────────────── */
+    .skills-wrap { background: var(--bg-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .skill-groups { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+    .skill-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--r);
+      padding: 1.65rem; transition: border-color 0.3s;
+    }
+    .skill-card:hover { border-color: var(--border-h); }
+    .skill-head { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.25rem; }
+    .skill-icon {
+      width: 38px; height: 38px; border-radius: 9px;
+      display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+    }
+    .skill-card h3 { font-size: 0.95rem; font-weight: 700; }
+
+    .chips { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .chip {
+      font-size: 0.76rem; font-weight: 500; padding: 0.3rem 0.8rem;
+      border-radius: 100px; border: 1px solid; letter-spacing: 0.02em;
+      cursor: default; transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .chip:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0,0,0,0.3); }
+    .c-blue   { color: var(--blue-l);  background: rgba(59,130,246,0.08);  border-color: rgba(59,130,246,0.22); }
+    .c-cyan   { color: var(--cyan);    background: rgba(6,182,212,0.08);   border-color: rgba(6,182,212,0.22); }
+    .c-purple { color: var(--purple);  background: rgba(167,139,250,0.08); border-color: rgba(167,139,250,0.22); }
+    .c-green  { color: var(--green);   background: rgba(52,211,153,0.08);  border-color: rgba(52,211,153,0.22); }
+
+    /* ──────────────────────  EXPERIENCE  ────────────────────── */
+    .exp-wrap {
+      background: var(--card); border: 1px solid var(--border); border-radius: 20px;
+      padding: 2.5rem; position: relative; overflow: hidden;
+    }
+    .exp-wrap::before {
+      content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 3px;
+      background: linear-gradient(to bottom, var(--blue), var(--cyan), transparent);
+      border-radius: 3px;
+    }
+    .exp-period {
+      font-family: var(--mono); font-size: 0.75rem; color: var(--cyan); margin-bottom: 0.5rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .badge-active {
+      font-size: 0.6rem; background: rgba(52,211,153,0.15); color: var(--green);
+      border: 1px solid rgba(52,211,153,0.3); padding: 0.1rem 0.5rem;
+      border-radius: 100px; letter-spacing: 0.05em; text-transform: uppercase; font-family: var(--font);
+    }
+    .exp-title { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.35rem; }
+    .exp-company {
+      font-size: 0.9rem; color: var(--muted); margin-bottom: 1.75rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .sep { width: 3px; height: 3px; background: var(--muted); border-radius: 50%; }
+    .highlight-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+    .highlight-list li {
+      font-size: 0.9rem; color: var(--dim); padding: 0.85rem 1rem 0.85rem 2rem;
+      background: var(--surface); border: 1px solid var(--border); border-radius: 9px;
+      position: relative; transition: border-color 0.25s;
+    }
+    .highlight-list li:hover { border-color: var(--border-h); }
+    .highlight-list li::before {
+      content: '✦'; position: absolute; left: 0.75rem; color: var(--blue);
+      font-size: 0.65rem; top: 50%; transform: translateY(-50%);
+    }
+
+    /* ──────────────────────  EDUCATION  ────────────────────── */
+    .edu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+    .edu-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--r);
+      padding: 1.75rem; position: relative; overflow: hidden; transition: all 0.3s;
+    }
+    .edu-card::after {
+      content: '🎓'; position: absolute; right: 1.25rem; top: 1.25rem;
+      font-size: 2.2rem; opacity: 0.1; transition: opacity 0.3s;
+    }
+    .edu-card:hover { border-color: var(--border-h); transform: translateY(-3px); }
+    .edu-card:hover::after { opacity: 0.18; }
+    .edu-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; padding-right: 2.5rem; }
+    .edu-card .degree { font-size: 0.88rem; color: var(--blue-l); font-weight: 500; margin-bottom: 0.9rem; }
+    .edu-meta { font-family: var(--mono); font-size: 0.73rem; color: var(--muted); }
+    .cgpa-pill {
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      margin-top: 0.65rem; padding: 0.25rem 0.7rem;
+      background: rgba(52,211,153,0.09); border: 1px solid rgba(52,211,153,0.25);
+      border-radius: 100px; font-size: 0.74rem; color: var(--green);
+      font-family: var(--mono);
+    }
+
+    /* ──────────────────────  CONTACT  ────────────────────── */
+    .contact-band {
+      background: linear-gradient(160deg, rgba(59,130,246,0.05) 0%, rgba(6,182,212,0.04) 50%, rgba(167,139,250,0.04) 100%);
+      border-top: 1px solid var(--border);
+    }
+    .contact-inner {
+      display: flex; justify-content: space-between; align-items: center; gap: 2.5rem;
+      padding: 5.5rem 0;
+    }
+    .contact-text h2 {
+      font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+    .contact-text p { font-size: 0.95rem; color: var(--muted); }
+    .contact-links { display: flex; flex-direction: column; gap: 0.8rem; }
+    .contact-link {
+      display: flex; align-items: center; gap: 0.85rem; min-width: 280px;
+      padding: 1rem 1.5rem; background: var(--card); border: 1px solid var(--border);
+      border-radius: 10px; text-decoration: none; color: var(--text);
+      font-size: 0.88rem; font-weight: 500; transition: all 0.25s;
+    }
+    .contact-link .ic {
+      width: 32px; height: 32px; border-radius: 7px;
+      display: flex; align-items: center; justify-content: center; font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .contact-link:hover {
+      border-color: var(--blue); background: rgba(59,130,246,0.09);
+      transform: translateX(-5px); box-shadow: 4px 0 20px rgba(59,130,246,0.1);
+    }
+
+    /* ──────────────────────  FOOTER  ────────────────────── */
+    footer {
+      text-align: center; padding: 2rem;
+      font-size: 0.72rem; color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    /* ──────────────────────  SCROLL REVEAL  ────────────────────── */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+    .d1 { transition-delay: 0.08s; }
+    .d2 { transition-delay: 0.16s; }
+    .d3 { transition-delay: 0.24s; }
+    .d4 { transition-delay: 0.32s; }
+
+    /* ──────────────────────  RESPONSIVE  ────────────────────── */
+    @media (max-width: 950px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-panel { display: none; }
+      .project-grid, .skill-groups, .edu-grid { grid-template-columns: 1fr; }
+      .contact-inner { flex-direction: column; }
+      .contact-links { width: 100%; }
+      .contact-link { min-width: 0; }
+    }
+    @media (max-width: 640px) {
+      .nav { padding: 0 1.25rem; }
+      .nav-links { gap: 1.2rem; }
+      .container { padding: 0 1.25rem; }
+      .hero { padding: 100px 1.25rem 60px; }
+      .section { padding: 4rem 0; }
+      .contact-inner { padding: 4rem 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .orb { animation: none; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <a class="nav-brand" href="#top">Shalini.</a>
+  <nav aria-label="Primary">
+    <ul class="nav-links">
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top" aria-label="Introduction">
+  <div class="orb orb-1" aria-hidden="true"></div>
+  <div class="orb orb-2" aria-hidden="true"></div>
+  <div class="orb orb-3" aria-hidden="true"></div>
+  <div class="hero-dots" aria-hidden="true"></div>
+
+  <div class="hero-inner">
+    <!-- left -->
+    <div>
+      <p class="eyebrow">Available for backend, SAP Commerce &amp; enterprise platform roles</p>
+      <h1 class="hero-name">Shalini</h1>
+      <p class="hero-role">
+        <span id="typewriter" aria-live="polite"></span>
+        <span class="cursor" aria-hidden="true"></span>
+      </p>
+      <p class="hero-summary">
+        Backend developer with 3+ years delivering B2B enterprise solutions on SAP Commerce Cloud.
+        Strong in Hybris core architecture, OCC web services, Impex scripting, REST integration,
+        performance optimization, and secure customer portal delivery.
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#projects">View Work ↓</a>
+        <a class="btn btn-ghost" href="static/assets/Shalini_Resume_With_Portfolio.pdf">Download Resume ↗</a>
+      </div>
+    </div>
+
+    <!-- right panel -->
+    <aside class="hero-panel" aria-label="Highlights">
+      <div class="panel-loc">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Bangalore, Karnataka, India
+      </div>
+      <div class="stats-grid">
+        <div class="stat-cell">
+          <span class="stat-val" data-count="3" data-suffix="+ yrs">3+ yrs</span>
+          <span class="stat-lbl">Commerce exp.</span>
+        </div>
+        <div class="stat-cell">
+          <span class="stat-val" data-count="78" data-suffix="%">78%</span>
+          <span class="stat-lbl">Batch gain</span>
+        </div>
+        <div class="stat-cell">
+          <span class="stat-val" data-count="450" data-suffix="+">450+</span>
+          <span class="stat-lbl">Portal users</span>
+        </div>
+        <div class="stat-cell">
+          <span class="stat-val" data-count="99.95" data-suffix="%" data-dec="2">99.95%</span>
+          <span class="stat-lbl">Availability</span>
+        </div>
+      </div>
+      <div class="open-badge">
+        <span class="pulse-dot" aria-hidden="true"></span>
+        Open to new opportunities
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- INTRO STRIP -->
+<div class="intro-strip">
+  <div class="container">
+    <p class="reveal">
+      I build <strong>secure, reliable, and automation-friendly commerce backends</strong> for B2B teams.
+      My work sits close to business operations — reducing manual tasks, improving API performance,
+      enabling self-service access, and keeping <strong>enterprise data protected</strong>.
+      Currently at <strong>Collins Aerospace</strong>, shipping 4 releases per quarter with 95% on-time delivery.
+    </p>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Selected impact</p>
+      <h2 class="section-title">Projects &amp; Case Studies</h2>
+    </div>
+    <div class="project-grid">
+
+      <article class="project-card reveal d1">
+        <div class="tag-row">
+          <span class="tag">SAP Commerce Cloud</span>
+          <span class="tag">Cron Jobs</span>
+          <span class="tag">Impex</span>
+        </div>
+        <h3>B2B SAP Commerce Automation Suite</h3>
+        <p>Designed Hybris customizations, Backoffice flows, data migration scripts, and cron jobs to automate enterprise workflows end-to-end.</p>
+        <ul class="impact-list">
+          <li>Reduced manual operations by 60%</li>
+          <li>Cut batch processing from 18 minutes to 4 minutes</li>
+          <li>Supported Related SBU, SBU Offboarding, Project Hornet &amp; Warranty Claims</li>
+        </ul>
+      </article>
+
+      <article class="project-card reveal d2">
+        <div class="tag-row">
+          <span class="tag">OCC</span>
+          <span class="tag">Spring MVC</span>
+          <span class="tag">REST APIs</span>
+          <span class="tag">CCv2</span>
+        </div>
+        <h3>OCC / Headless B2B Portal APIs</h3>
+        <p>Built and customized OCC web services and RESTful APIs for seamless B2B portal functionality and external system integration.</p>
+        <ul class="impact-list">
+          <li>Improved portal capabilities for 450+ business users</li>
+          <li>Drove a 12-point increase in Customer Portal satisfaction</li>
+          <li>Delivered reusable backend services for commerce workflows</li>
+        </ul>
+      </article>
+
+      <article class="project-card reveal d3">
+        <div class="tag-row">
+          <span class="tag">RBAC</span>
+          <span class="tag">PII Masking</span>
+          <span class="tag">Row-level Security</span>
+        </div>
+        <h3>Enterprise Data Security Controls</h3>
+        <p>Implemented data-protection controls aligned with SAP Commerce security practices across portal and backend workflows.</p>
+        <ul class="impact-list">
+          <li>Reduced audit findings by 70%</li>
+          <li>Strengthened role-based access and sensitive-data handling</li>
+          <li>Improved security posture for enterprise customer data</li>
+        </ul>
+      </article>
+
+      <article class="project-card reveal d4">
+        <div class="tag-row">
+          <span class="tag">Production Support</span>
+          <span class="tag">API Latency</span>
+          <span class="tag">Reliability</span>
+        </div>
+        <h3>Customer Portal Performance Optimization</h3>
+        <p>Diagnosed P1/P2 incidents, optimized backend performance, and collaborated across Product, QA, and DevOps for reliable releases.</p>
+        <ul class="impact-list">
+          <li>Achieved 1.8-hour MTTR for critical incidents</li>
+          <li>Improved p95 API latency by 28%</li>
+          <li>Maintained 99.95% service availability</li>
+        </ul>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<div class="skills-wrap">
+  <section class="section" id="skills">
+    <div class="container">
+      <div class="reveal">
+        <p class="section-label">Technical stack</p>
+        <h2 class="section-title">Skills</h2>
+      </div>
+      <div class="skill-groups">
+
+        <article class="skill-card reveal d1">
+          <div class="skill-head">
+            <div class="skill-icon" style="background:rgba(59,130,246,0.12)">☁️</div>
+            <h3>SAP Commerce Cloud</h3>
+          </div>
+          <div class="chips">
+            <span class="chip c-blue">Hybris Core Architecture</span>
+            <span class="chip c-blue">CCv2</span>
+            <span class="chip c-blue">OCC / Headless APIs</span>
+            <span class="chip c-blue">Backoffice Customization</span>
+            <span class="chip c-blue">WCMS</span>
+            <span class="chip c-blue">Impex</span>
+            <span class="chip c-blue">Cron Jobs</span>
+            <span class="chip c-blue">Solr</span>
+            <span class="chip c-blue">Hot Folder</span>
+            <span class="chip c-blue">Populators &amp; Converters</span>
+            <span class="chip c-blue">Events</span>
+            <span class="chip c-blue">Interceptors</span>
+            <span class="chip c-blue">Cart &amp; Checkout</span>
+          </div>
+        </article>
+
+        <article class="skill-card reveal d2">
+          <div class="skill-head">
+            <div class="skill-icon" style="background:rgba(6,182,212,0.12)">⚙️</div>
+            <h3>Backend Engineering</h3>
+          </div>
+          <div class="chips">
+            <span class="chip c-cyan">Java</span>
+            <span class="chip c-cyan">Spring MVC</span>
+            <span class="chip c-cyan">Spring Hibernate</span>
+            <span class="chip c-cyan">RESTful APIs</span>
+            <span class="chip c-cyan">Microservices Architecture</span>
+            <span class="chip c-cyan">System Design</span>
+            <span class="chip c-cyan">Performance Optimization</span>
+          </div>
+        </article>
+
+        <article class="skill-card reveal d3">
+          <div class="skill-head">
+            <div class="skill-icon" style="background:rgba(167,139,250,0.12)">🔐</div>
+            <h3>Data &amp; Security</h3>
+          </div>
+          <div class="chips">
+            <span class="chip c-purple">SQL</span>
+            <span class="chip c-purple">MySQL</span>
+            <span class="chip c-purple">Oracle</span>
+            <span class="chip c-purple">DBMS / RDBMS</span>
+            <span class="chip c-purple">RBAC</span>
+            <span class="chip c-purple">PII Masking</span>
+            <span class="chip c-purple">Row-level Security</span>
+            <span class="chip c-purple">Data Modeling</span>
+          </div>
+        </article>
+
+        <article class="skill-card reveal d4">
+          <div class="skill-head">
+            <div class="skill-icon" style="background:rgba(52,211,153,0.12)">🛠️</div>
+            <h3>Tools &amp; DevOps</h3>
+          </div>
+          <div class="chips">
+            <span class="chip c-green">Git</span>
+            <span class="chip c-green">Jenkins</span>
+            <span class="chip c-green">Azure DevOps</span>
+            <span class="chip c-green">CI/CD Pipelines</span>
+            <span class="chip c-green">Eclipse</span>
+            <span class="chip c-green">IntelliJ IDEA</span>
+            <span class="chip c-green">Agile Delivery</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- EXPERIENCE -->
+<section class="section" id="experience">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Work history</p>
+      <h2 class="section-title">Experience</h2>
+    </div>
+    <div class="exp-wrap reveal">
+      <div class="exp-period">
+        Feb 2023 — Present
+        <span class="badge-active">Active</span>
+      </div>
+      <h3 class="exp-title">Associate Software Developer</h3>
+      <p class="exp-company">
+        Collins Aerospace <span class="sep"></span> Bangalore, India
+      </p>
+      <ul class="highlight-list">
+        <li>Delivered SAP Hybris B2B customizations, OCC APIs, Backoffice workflows, WCMS components, and commerce automation across enterprise feature tracks.</li>
+        <li>Collaborated with Product, QA, and DevOps to ship 4 releases per quarter with 95% on-time delivery across two years.</li>
+        <li>Applied performance, security, and platform best practices — achieving 99.95% service availability and 28% p95 API latency improvement.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<div class="hr"></div>
+<section class="section">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Academic background</p>
+      <h2 class="section-title">Education</h2>
+    </div>
+    <div class="edu-grid">
+      <article class="edu-card reveal d1">
+        <h3>PES University, Bangalore</h3>
+        <p class="degree">Master of Computer Applications</p>
+        <div class="edu-meta">Dec 2021 – Jul 2023</div>
+        <span class="cgpa-pill">⭐ CGPA: 8.28 / 10</span>
+      </article>
+      <article class="edu-card reveal d2">
+        <h3>Lalit Narayan Mishra Institute, Patna</h3>
+        <p class="degree">Bachelor of Computer Applications</p>
+        <div class="edu-meta">Aug 2017 – Jul 2020</div>
+        <span class="cgpa-pill">⭐ CGPA: 7.9 / 10</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact-band" id="contact">
+  <div class="container">
+    <div class="contact-inner">
+      <div class="contact-text reveal">
+        <p class="section-label">Let's connect</p>
+        <h2>Open to SAP Commerce, backend &amp; B2B platform roles.</h2>
+        <p>Based in Bangalore · Available immediately</p>
+      </div>
+      <div class="contact-links reveal d2">
+        <a class="contact-link" href="mailto:shalinipathak3@gmail.com">
+          <span class="ic" style="background:rgba(59,130,246,0.12)">✉️</span>
+          shalinipathak3@gmail.com
+        </a>
+        <a class="contact-link" href="tel:+916204275383">
+          <span class="ic" style="background:rgba(6,182,212,0.12)">📱</span>
+          +91 6204 275 383
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  Shalini &nbsp;·&nbsp; SAP Commerce Cloud Developer &nbsp;·&nbsp; Bangalore, India
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ── NAV scroll & active section ── */
+  const nav = document.getElementById('nav');
+  const navAs = document.querySelectorAll('.nav-links a');
+  const sections = ['projects','skills','experience','contact'].map(id => document.getElementById(id));
+
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 50);
+    let active = '';
+    sections.forEach(s => { if (s && s.getBoundingClientRect().top < 120) active = s.id; });
+    navAs.forEach(a => a.classList.toggle('active', a.getAttribute('href') === `#${active}`));
+  }, { passive: true });
+
+  /* ── Typewriter ── */
+  const roles = [
+    'SAP Commerce Cloud Developer',
+    'SAP Hybris Backend Engineer',
+    'B2B Enterprise API Specialist',
+    'OCC & Headless API Developer',
+  ];
+  let ri = 0, ci = 0, del = false;
+  const tw = document.getElementById('typewriter');
+  function tick() {
+    const r = roles[ri];
+    if (!del) {
+      tw.textContent = r.slice(0, ++ci);
+      if (ci === r.length) { del = true; setTimeout(tick, 2200); return; }
+    } else {
+      tw.textContent = r.slice(0, --ci);
+      if (ci === 0) { del = false; ri = (ri + 1) % roles.length; }
+    }
+    setTimeout(tick, del ? 48 : 85);
+  }
+  tick();
+
+  /* ── Counter animation ── */
+  function countUp(el) {
+    const target = parseFloat(el.dataset.count);
+    const suffix = el.dataset.suffix || '';
+    const dec    = parseInt(el.dataset.dec || '0');
+    const ms     = 1800, fps = 60, steps = ms / (1000 / fps);
+    let cur = 0;
+    const inc = target / steps;
+    const t = setInterval(() => {
+      cur = Math.min(cur + inc, target);
+      el.textContent = cur.toFixed(dec) + suffix;
+      if (cur >= target) { el.textContent = target.toFixed(dec) + suffix; clearInterval(t); }
+    }, 1000 / fps);
+  }
+
+  const cntObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { countUp(e.target); cntObs.unobserve(e.target); } });
+  }, { threshold: 0.6 });
+  document.querySelectorAll('[data-count]').forEach(el => cntObs.observe(el));
+
+  /* ── Scroll reveal ── */
+  const revObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); revObs.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+
+})();
+</script>
+</body>
+</html>
