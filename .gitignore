@@ -1,0 +1,26 @@
+# Python cache — never upload these
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment variables
+.env
+
+# Streamlit secrets (contains passwords — never upload)
+.streamlit/secrets.toml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Old local server files (not needed for Streamlit)
+app.py
+styles.css
+generate_updated_resume.py
+generate_updated_resume_cpython-312.pyc
