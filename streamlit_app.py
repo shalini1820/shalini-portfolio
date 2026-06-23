@@ -978,7 +978,7 @@ HTML = f"""
     </div>
     <div class="contact-links">
       <a class="contact-link" href="mailto:shalinipathak3@gmail.com"><span>Email</span><strong>shalinipathak3@gmail.com</strong></a>
-      <a class="contact-link" href="tel:+916204275383"><span>Phone</span><strong>+91 6204 275 383</strong></a>
+      <a class="contact-link" href="https://www.linkedin.com/in/shalini-pathak-6bb331216/" target="_blank"><span>LinkedIn</span><strong>View Profile</strong></a>
       <a class="contact-link" href="{resume_href}" download="Shalini_Pathak_Resume.pdf"><span>Resume</span><strong>Download PDF</strong></a>
     </div>
   </div>
