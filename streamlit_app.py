@@ -196,12 +196,12 @@ html { scroll-behavior: smooth; }
 }
 
 .hero h1 {
-    margin: 26px 0 0;
-    max-width: 860px;
+    margin: 24px 0 0;
+    max-width: 760px;
     color: white;
-    font-size: clamp(2.45rem, 4.8vw, 5.05rem);
-    line-height: 1.08;
-    letter-spacing: -.045em;
+    font-size: clamp(1.9rem, 3.45vw, 3.75rem);
+    line-height: 1.12;
+    letter-spacing: -.035em;
     font-weight: 900;
 }
 
