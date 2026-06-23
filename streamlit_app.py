@@ -939,9 +939,9 @@ HTML = f"""
   <aside class="profile-panel">
     <div class="profile-head">
       <div>
-        <div class="profile-role">Commerce platform snapshot</div>
+        <div class="profile-role">Engineering focus areas</div>
         <div class="profile-title">
-          Backend systems designed for scale, control and reliable B2B customer experiences.
+           Platform strengths across APIs, automation, security and production reliability.
         </div>
       </div>
       <div class="status-pill">Open to backend roles</div>
