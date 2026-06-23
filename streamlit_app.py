@@ -27,39 +27,35 @@ resume_href = pdf_download_link(RESUME_PATH)
 
 CSS = """
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 :root {
-    --bg: #070b12;
-    --bg-2: #0b111c;
-    --panel: rgba(255, 255, 255, 0.065);
-    --panel-soft: rgba(255, 255, 255, 0.04);
-    --border: rgba(226, 232, 240, 0.13);
-    --border-strong: rgba(236, 201, 75, 0.34);
+    --ink: #080713;
+    --ink-2: #101023;
+    --plum: #6d28d9;
+    --violet: #a78bfa;
+    --rose: #fb7185;
+    --peach: #fda4af;
+    --blue: #7dd3fc;
     --text: #f8fafc;
-    --muted: #aab6c5;
-    --soft: #d7dee8;
-    --yellow: #f2cf63;
-    --green: #8ee8bd;
-    --cyan: #8bd8ff;
-    --ink: #09111c;
-    --max: 1180px;
-    --radius-xl: 34px;
-    --radius-lg: 24px;
-    --radius-md: 18px;
-    --shadow: 0 28px 90px rgba(0, 0, 0, 0.34);
+    --soft: #d8d4e8;
+    --muted: #9ca3af;
+    --border: rgba(255,255,255,.11);
+    --panel: rgba(255,255,255,.052);
+    --panel-strong: rgba(255,255,255,.075);
+    --max: 1500px;
 }
 
 html { scroll-behavior: smooth; }
 
 .stApp {
     background:
-        radial-gradient(circle at 82% 8%, rgba(242, 207, 99, .14), transparent 30%),
-        radial-gradient(circle at 15% 24%, rgba(139, 216, 255, .13), transparent 34%),
-        radial-gradient(circle at 72% 84%, rgba(142, 232, 189, .10), transparent 32%),
-        linear-gradient(135deg, #070b12 0%, #0b111c 54%, #060914 100%);
+        radial-gradient(circle at 4% 4%, rgba(167,139,250,.20), transparent 28rem),
+        radial-gradient(circle at 92% 14%, rgba(251,113,133,.16), transparent 30rem),
+        radial-gradient(circle at 48% 100%, rgba(125,211,252,.10), transparent 34rem),
+        linear-gradient(135deg, #080713 0%, #101023 52%, #080713 100%);
     color: var(--text);
-    font-family: 'Manrope', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Inter', system-ui, sans-serif;
 }
 
 #MainMenu, header, footer, [data-testid="stSidebar"], [data-testid="collapsedControl"] {
@@ -73,164 +69,174 @@ html { scroll-behavior: smooth; }
 
 [data-testid="stVerticalBlock"] { gap: 0 !important; }
 
-.top-nav {
+.site-nav {
     position: sticky;
     top: 0;
     z-index: 999;
-    backdrop-filter: blur(22px);
-    background: rgba(7, 11, 18, .80);
-    border-bottom: 1px solid rgba(226,232,240,.10);
+    border-bottom: 1px solid var(--border);
+    background: rgba(8,7,19,.78);
+    backdrop-filter: blur(20px);
 }
 
 .nav-inner {
     width: min(var(--max), calc(100vw - 40px));
-    height: 72px;
+    height: 80px;
     margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 22px;
+    gap: 24px;
 }
 
 .brand {
-    color: var(--text) !important;
+    color: white !important;
     text-decoration: none !important;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: .92rem;
+    font-family: 'Sora', sans-serif;
+    font-size: .72rem;
     font-weight: 800;
-    letter-spacing: .16em;
+    letter-spacing: .20em;
     text-transform: uppercase;
     white-space: nowrap;
 }
 
 .nav-links {
     display: flex;
-    gap: 8px;
     align-items: center;
+    gap: 26px;
 }
 
 .nav-links a {
-    color: var(--muted) !important;
+    color: var(--soft) !important;
     text-decoration: none !important;
     font-size: .88rem;
-    font-weight: 700;
-    padding: 10px 13px;
-    border-radius: 999px;
-    border: 1px solid transparent;
-    transition: all .18s ease;
+    font-weight: 650;
+    transition: color .18s ease;
 }
 
 .nav-links a:hover {
-    color: var(--text) !important;
-    background: rgba(255,255,255,.055);
-    border-color: rgba(226,232,240,.14);
+    color: var(--peach) !important;
+}
+
+.resume-pill {
+    color: var(--soft) !important;
+    text-decoration: none !important;
+    padding: 10px 17px;
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.04);
+    font-size: .86rem;
+    font-weight: 800;
+}
+
+.resume-pill:hover {
+    color: var(--peach) !important;
+    border-color: rgba(251,113,133,.42);
 }
 
 .ticker {
-    border-bottom: 1px solid rgba(226,232,240,.08);
-    background: rgba(255,255,255,.025);
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    background: rgba(255,255,255,.018);
     overflow: hidden;
 }
 
 .ticker-inner {
     width: min(var(--max), calc(100vw - 40px));
     margin: 0 auto;
-    min-height: 38px;
+    overflow: hidden;
+}
+
+.ticker-track {
+    width: max-content;
+    min-width: 100%;
     display: flex;
-    align-items: center;
-    gap: 18px;
+    gap: 34px;
+    padding: 12px 0;
+    animation: tickerScroll 48s linear infinite;
+}
+
+.ticker-track span {
     color: var(--muted);
     font-size: .82rem;
-    font-weight: 700;
+    font-weight: 750;
     white-space: nowrap;
 }
 
-.ticker-inner span::before {
+.ticker-track span::before {
     content: '';
     display: inline-block;
     width: 6px;
     height: 6px;
-    margin-right: 9px;
+    margin-right: 10px;
     border-radius: 50%;
-    background: var(--green);
-    box-shadow: 0 0 0 5px rgba(142,232,189,.10);
+    background: linear-gradient(135deg, var(--rose), var(--violet));
+    box-shadow: 0 0 18px rgba(251,113,133,.42);
+}
+
+@keyframes tickerScroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
 }
 
 .hero {
     width: min(var(--max), calc(100vw - 40px));
     margin: 0 auto;
-    min-height: calc(100vh - 110px);
+    min-height: calc(100vh - 122px);
     display: grid;
-    grid-template-columns: 1.02fr .98fr;
+    grid-template-columns: 1.05fr .95fr;
     align-items: center;
-    gap: 52px;
-    padding: 76px 0 62px;
+    gap: 56px;
+    padding: 78px 0 56px;
 }
 
 .kicker {
-    color: var(--yellow);
-    font-size: .86rem;
-    font-weight: 800;
-    letter-spacing: .18em;
+    color: var(--peach);
+    font-size: .68rem;
+    font-weight: 900;
+    letter-spacing: .22em;
     text-transform: uppercase;
-    margin-bottom: 20px;
 }
 
 .hero h1 {
-    margin: 0;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: clamp(3.3rem, 8vw, 7.4rem);
-    line-height: .88;
-    letter-spacing: -.075em;
+    margin: 30px 0 0;
+    max-width: 980px;
+    color: white;
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(3rem, 6.1vw, 6.5rem);
+    line-height: 1.035;
+    letter-spacing: -.055em;
     font-weight: 800;
 }
 
-.hero h1 .surname {
-    color: var(--yellow);
-}
-
-.hero-title {
-    margin-top: 22px;
-    max-width: 740px;
-    color: var(--text);
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: clamp(1.55rem, 2.7vw, 2.45rem);
-    line-height: 1.14;
-    letter-spacing: -.045em;
-    font-weight: 750;
+.text-gradient {
+    background: linear-gradient(135deg, #ffffff 0%, var(--peach) 42%, var(--violet) 72%, var(--blue) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
 .hero-copy {
-    margin: 18px 0 0;
-    max-width: 730px;
+    margin: 28px 0 0;
+    max-width: 790px;
     color: var(--soft);
-    font-size: clamp(1rem, 1.35vw, 1.12rem);
-    line-height: 1.76;
+    font-size: clamp(1.03rem, 1.25vw, 1.16rem);
+    line-height: 1.78;
 }
 
-.meta-line {
-    margin-top: 22px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+.hero-meta {
+    margin-top: 20px;
+    color: var(--muted);
+    font-size: .95rem;
+    line-height: 1.8;
 }
 
-.meta-pill {
-    display: inline-flex;
-    align-items: center;
-    padding: 9px 12px;
-    border-radius: 999px;
-    color: var(--soft);
-    background: rgba(255,255,255,.055);
-    border: 1px solid rgba(226,232,240,.12);
-    font-size: .86rem;
-    font-weight: 700;
+.hero-meta p {
+    margin: 0;
 }
 
 .hero-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 14px;
+    gap: 13px;
     margin-top: 30px;
 }
 
@@ -238,248 +244,283 @@ html { scroll-behavior: smooth; }
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 14px 18px;
+    padding: 14px 20px;
     border-radius: 999px;
     text-decoration: none !important;
-    font-weight: 800;
-    font-size: .94rem;
-    border: 1px solid var(--border);
-    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    font-size: .92rem;
+    font-weight: 850;
+    transition: .18s ease;
 }
 
-.btn:hover { transform: translateY(-2px); }
+.btn:hover {
+    transform: translateY(-2px);
+}
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--yellow), var(--green));
-    color: var(--ink) !important;
-    border-color: rgba(255,255,255,.12);
-    box-shadow: 0 18px 42px rgba(242,207,99,.20);
+    background: linear-gradient(135deg, var(--rose), var(--violet));
+    color: white !important;
+    box-shadow: 0 16px 38px rgba(251,113,133,.22);
 }
 
-.btn-ghost {
+.btn-secondary {
     color: var(--text) !important;
-    background: rgba(255,255,255,.055);
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.045);
+}
+
+.btn-secondary:hover {
+    color: var(--peach) !important;
+    border-color: rgba(251,113,133,.40);
 }
 
 .profile-panel {
-    position: relative;
     border: 1px solid var(--border);
-    border-radius: var(--radius-xl);
+    border-radius: 36px;
     background:
-        radial-gradient(circle at 88% 0%, rgba(242,207,99,.16), transparent 34%),
-        linear-gradient(180deg, rgba(255,255,255,.085), rgba(255,255,255,.036));
-    box-shadow: var(--shadow);
+        linear-gradient(135deg, rgba(167,139,250,.10), rgba(251,113,133,.045)),
+        radial-gradient(circle at 16% 18%, rgba(251,113,133,.16), transparent 30%),
+        radial-gradient(circle at 84% 0%, rgba(125,211,252,.12), transparent 30%),
+        rgba(15,14,35,.88);
+    backdrop-filter: blur(18px);
+    box-shadow:
+        0 0 0 1px rgba(255,255,255,.05),
+        0 28px 90px rgba(0,0,0,.45),
+        0 0 80px rgba(167,139,250,.10);
     overflow: hidden;
-    padding: 26px;
+    padding: 28px;
 }
 
-.profile-panel::before {
-    content: '';
-    position: absolute;
-    inset: -1px;
-    padding: 1px;
-    border-radius: inherit;
-    pointer-events: none;
-    background: linear-gradient(135deg, rgba(242,207,99,.38), transparent 42%, rgba(142,232,189,.22));
-    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    mask-composite: exclude;
-    -webkit-mask-composite: xor;
-}
-
-.panel-top {
+.profile-head {
     display: flex;
-    justify-content: space-between;
-    gap: 16px;
     align-items: flex-start;
+    justify-content: space-between;
+    gap: 22px;
     margin-bottom: 26px;
 }
 
-.panel-label {
-    color: var(--yellow);
-    font-size: .76rem;
-    font-weight: 850;
-    letter-spacing: .16em;
+.profile-role {
+    color: var(--peach);
+    font-size: .75rem;
+    font-weight: 900;
+    letter-spacing: .22em;
     text-transform: uppercase;
 }
 
-.panel-status {
-    padding: 7px 10px;
+.profile-title {
+    margin-top: 12px;
+    color: white;
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(1.45rem, 2.3vw, 2.2rem);
+    line-height: 1.12;
+    letter-spacing: -.045em;
+    font-weight: 800;
+}
+
+.status-pill {
+    flex: none;
+    color: #fce7f3;
+    border: 1px solid rgba(251,113,133,.24);
+    background: rgba(251,113,133,.09);
+    padding: 8px 11px;
     border-radius: 999px;
-    color: #dffbea;
-    background: rgba(142,232,189,.09);
-    border: 1px solid rgba(142,232,189,.22);
-    font-size: .78rem;
-    font-weight: 800;
-    white-space: nowrap;
+    font-size: .75rem;
+    font-weight: 850;
 }
 
-.panel-title {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: clamp(1.7rem, 2.8vw, 2.5rem);
-    line-height: 1.08;
-    letter-spacing: -.055em;
-    font-weight: 800;
-    margin-bottom: 20px;
-}
-
-.capability-map {
+.snapshot-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
 }
 
-.capability-card {
-    min-height: 138px;
-    padding: 16px;
-    border: 1px solid rgba(226,232,240,.13);
-    border-radius: 22px;
-    background: rgba(255,255,255,.045);
-}
-
-.capability-card strong {
-    display: block;
-    color: var(--text);
-    font-size: 1rem;
-    margin-bottom: 8px;
-}
-
-.capability-card span {
-    display: block;
-    color: var(--muted);
-    line-height: 1.55;
-    font-size: .9rem;
-}
-
-.availability-card {
-    margin-top: 14px;
-    padding: 20px;
+.snapshot-card {
+    min-height: 142px;
+    padding: 17px;
     border-radius: 24px;
-    border: 1px solid rgba(242,207,99,.20);
-    background: linear-gradient(135deg, rgba(242,207,99,.12), rgba(142,232,189,.09));
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.045);
+    transition: .22s ease;
 }
 
-.availability-card strong {
+.snapshot-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(251,113,133,.38);
+    background: rgba(255,255,255,.068);
+}
+
+.snapshot-card strong {
     display: block;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 2.55rem;
-    line-height: .95;
-    letter-spacing: -.065em;
+    color: white;
+    margin-bottom: 10px;
+    font-size: 1rem;
 }
 
-.availability-card span {
+.snapshot-card span {
+    color: var(--muted);
+    font-size: .91rem;
+    line-height: 1.58;
+}
+
+.feature-card {
+    margin-top: 14px;
+    padding: 22px;
+    border-radius: 26px;
+    border: 1px solid rgba(251,113,133,.25);
+    background: linear-gradient(135deg, rgba(251,113,133,.13), rgba(167,139,250,.08));
+}
+
+.feature-card strong {
+    display: block;
+    color: white;
+    font-family: 'Sora', sans-serif;
+    font-size: 2.3rem;
+    line-height: .95;
+    letter-spacing: -.055em;
+    font-weight: 800;
+}
+
+.feature-card span {
     display: block;
     color: var(--soft);
     margin-top: 9px;
-    line-height: 1.55;
+    line-height: 1.58;
 }
 
-.metric-strip {
+.metric-wrap,
+.section,
+.contact-card,
+.footer-line {
     width: min(var(--max), calc(100vw - 40px));
-    margin: -8px auto 0;
+    margin: 0 auto;
+}
+
+.metric-wrap {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 14px;
+    gap: 16px;
+    padding: 26px 0 40px;
+}
+
+.metric-card,
+.proof-card,
+.case-card,
+.skill-card,
+.timeline-card,
+.edu-card,
+.contact-card {
+    border: 1px solid var(--border);
+    background: var(--panel);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 20px 80px rgba(0,0,0,.28);
 }
 
 .metric-card {
-    border: 1px solid var(--border);
-    background: rgba(255,255,255,.052);
-    border-radius: 22px;
-    padding: 22px;
-    min-height: 128px;
+    min-height: 150px;
+    padding: 23px;
+    border-radius: 28px;
 }
 
 .metric-value {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: clamp(1.8rem, 3vw, 2.5rem);
-    font-weight: 800;
+    color: white;
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    line-height: 1;
     letter-spacing: -.06em;
-    color: var(--text);
+    font-weight: 800;
 }
 
 .metric-label {
+    margin-top: 12px;
+    color: white;
+    font-size: .96rem;
+    font-weight: 850;
+}
+
+.metric-note {
+    margin-top: 8px;
     color: var(--muted);
-    margin-top: 7px;
-    line-height: 1.45;
-    font-size: .93rem;
-    font-weight: 600;
+    line-height: 1.5;
+    font-size: .9rem;
 }
 
 .section {
-    width: min(var(--max), calc(100vw - 40px));
-    margin: 0 auto;
-    padding: 96px 0 0;
+    padding: 94px 0 0;
 }
 
-.section-heading {
-    max-width: 800px;
+.section-head {
+    max-width: 900px;
     margin-bottom: 34px;
 }
 
 .section-eyebrow {
-    color: var(--yellow);
-    font-size: .8rem;
-    letter-spacing: .18em;
+    color: var(--peach);
+    font-size: .78rem;
+    font-weight: 900;
+    letter-spacing: .28em;
     text-transform: uppercase;
-    font-weight: 850;
-    margin-bottom: 12px;
 }
 
 .section h2 {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: clamp(2.15rem, 4.2vw, 4rem);
+    margin: 14px 0 0;
+    color: white;
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(2.2rem, 4.8vw, 4.7rem);
     line-height: 1.02;
-    letter-spacing: -.07em;
-    margin: 0;
+    letter-spacing: -.064em;
+    font-weight: 800;
 }
 
 .section-subtitle {
+    margin-top: 18px;
     color: var(--muted);
-    margin-top: 15px;
-    font-size: 1.03rem;
+    font-size: 1.05rem;
     line-height: 1.72;
 }
 
 .proof-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 14px;
-}
-
-.proof-card, .case-card, .skill-card, .timeline-card, .edu-card, .contact-card {
-    border: 1px solid var(--border);
-    background: linear-gradient(180deg, rgba(255,255,255,.066), rgba(255,255,255,.033));
-    border-radius: var(--radius-lg);
-    box-shadow: 0 20px 48px rgba(2,6,23,.18);
+    gap: 16px;
 }
 
 .proof-card {
-    padding: 22px;
+    padding: 25px;
+    border-radius: 28px;
+    transition: .22s ease;
+}
+
+.proof-card:hover,
+.case-card:hover,
+.skill-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(251,113,133,.36);
+    background: rgba(255,255,255,.07);
 }
 
 .proof-card strong {
     display: block;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 1.05rem;
-    margin-bottom: 8px;
+    color: var(--peach);
+    font-size: .78rem;
+    font-weight: 900;
+    letter-spacing: .18em;
+    text-transform: uppercase;
 }
 
 .proof-card p {
-    color: var(--muted);
-    margin: 0;
-    line-height: 1.62;
-    font-size: .95rem;
+    margin: 17px 0 0;
+    color: var(--soft);
+    line-height: 1.68;
 }
 
 .case-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
+    gap: 22px;
 }
 
 .case-card {
-    padding: 26px;
+    border-radius: 32px;
+    padding: 30px;
+    transition: .22s ease;
     position: relative;
     overflow: hidden;
 }
@@ -489,25 +530,28 @@ html { scroll-behavior: smooth; }
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background: radial-gradient(circle at 92% 0%, rgba(242,207,99,.12), transparent 30%);
+    background: radial-gradient(circle at 96% 0%, rgba(251,113,133,.10), transparent 32%);
 }
 
-.case-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 18px;
-    margin-bottom: 14px;
+.case-card > * {
     position: relative;
     z-index: 1;
 }
 
+.case-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
 .case-number {
-    color: var(--yellow);
-    font-size: .8rem;
-    font-weight: 850;
+    color: var(--peach);
+    font-size: .78rem;
+    font-weight: 950;
+    letter-spacing: .22em;
     text-transform: uppercase;
-    letter-spacing: .12em;
 }
 
 .tags {
@@ -518,59 +562,61 @@ html { scroll-behavior: smooth; }
 }
 
 .tag {
-    display: inline-flex;
-    padding: 6px 9px;
-    border: 1px solid rgba(242,207,99,.21);
-    background: rgba(242,207,99,.07);
-    color: #fde9a2;
-    border-radius: 999px;
-    font-size: .74rem;
-    font-weight: 800;
+    color: #ffe4e6;
+    background: rgba(251,113,133,.11);
+    border: 1px solid rgba(251,113,133,.22);
+    border-radius: 13px;
+    padding: 8px 10px;
+    font-size: .76rem;
+    font-weight: 850;
 }
 
 .case-card h3 {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 1.35rem;
-    letter-spacing: -.035em;
-    margin: 0 0 12px;
-    position: relative;
-    z-index: 1;
+    margin: 0;
+    color: white;
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(1.4rem, 2.3vw, 2.15rem);
+    line-height: 1.15;
+    letter-spacing: -.04em;
+    font-weight: 800;
+}
+
+.case-body {
+    display: grid;
+    grid-template-columns: .95fr 1.05fr;
+    gap: 24px;
+    margin-top: 18px;
+}
+
+.case-label {
+    color: var(--muted);
+    font-size: .72rem;
+    font-weight: 900;
+    letter-spacing: .18em;
+    text-transform: uppercase;
 }
 
 .case-card p {
-    color: var(--muted);
-    line-height: 1.7;
-    margin: 0;
-    position: relative;
-    z-index: 1;
+    color: var(--soft);
+    line-height: 1.72;
+    margin: 8px 0 0;
 }
 
 .impact-list {
     list-style: none;
     padding: 0;
-    margin: 18px 0 0;
+    margin: 8px 0 0;
     display: grid;
     gap: 10px;
-    position: relative;
-    z-index: 1;
 }
 
 .impact-list li {
     color: var(--soft);
-    line-height: 1.5;
-    padding-left: 22px;
-    position: relative;
-}
-
-.impact-list li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: .62em;
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--yellow), var(--green));
+    line-height: 1.52;
+    padding: 11px 13px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,.08);
+    background: rgba(255,255,255,.032);
 }
 
 .skills-grid {
@@ -580,93 +626,90 @@ html { scroll-behavior: smooth; }
 }
 
 .skill-card {
-    padding: 24px;
+    padding: 26px;
+    border-radius: 30px;
+    transition: .22s ease;
 }
 
-.skill-title {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 16px;
-}
-
-.skill-badge {
-    min-width: 44px;
-    height: 44px;
-    display: grid;
-    place-items: center;
-    border-radius: 15px;
-    background: rgba(242,207,99,.10);
-    border: 1px solid rgba(242,207,99,.18);
-    color: #fde9a2;
-    font-size: .78rem;
-    font-weight: 850;
-}
-
-.skill-title h3 {
-    margin: 0;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 1.15rem;
-    letter-spacing: -.03em;
+.skill-card h3 {
+    margin: 0 0 18px;
+    color: white;
+    font-family: 'Sora', sans-serif;
+    font-size: 1.25rem;
+    letter-spacing: -.025em;
+    font-weight: 800;
 }
 
 .chips {
     display: flex;
     flex-wrap: wrap;
-    gap: 9px;
+    gap: 10px;
 }
 
 .chip {
-    padding: 8px 10px;
-    border-radius: 999px;
-    background: rgba(255,255,255,.055);
     color: var(--soft);
-    border: 1px solid rgba(226,232,240,.13);
-    font-size: .84rem;
+    background: rgba(255,255,255,.045);
+    border: 1px solid rgba(255,255,255,.10);
+    border-radius: 15px;
+    padding: 10px 12px;
+    font-size: .86rem;
     font-weight: 700;
 }
 
-.timeline-card {
+.timeline-card,
+.edu-card {
+    border-radius: 32px;
     padding: 30px;
 }
 
 .timeline-top {
     display: flex;
     justify-content: space-between;
-    gap: 24px;
-    border-bottom: 1px solid rgba(226,232,240,.12);
-    padding-bottom: 20px;
-    margin-bottom: 20px;
+    gap: 28px;
+    padding-bottom: 22px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid rgba(255,255,255,.10);
 }
 
-.timeline-card h3 {
-    margin: 0 0 7px;
-    font-family: 'Plus Jakarta Sans', sans-serif;
+.timeline-card h3,
+.edu-card h3 {
+    margin: 0;
+    color: white;
+    font-family: 'Sora', sans-serif;
     font-size: 1.45rem;
-    letter-spacing: -.04em;
-}
-
-.company {
-    color: var(--yellow);
+    letter-spacing: -.035em;
     font-weight: 800;
 }
 
-.period {
+.company,
+.edu-degree {
+    margin-top: 7px;
+    color: var(--peach);
+    font-weight: 850;
+}
+
+.period,
+.edu-meta {
     color: var(--muted);
-    white-space: nowrap;
+    line-height: 1.65;
+}
+
+.period {
     text-align: right;
+    white-space: nowrap;
     font-weight: 700;
 }
 
-.active-pill {
+.active-pill,
+.cgpa {
     display: inline-flex;
-    margin-top: 8px;
-    padding: 5px 9px;
+    margin-top: 9px;
+    color: #fce7f3;
+    background: rgba(251,113,133,.09);
+    border: 1px solid rgba(251,113,133,.20);
     border-radius: 999px;
-    background: rgba(142,232,189,.10);
-    color: #c2f7d8;
-    border: 1px solid rgba(142,232,189,.20);
-    font-size: .75rem;
+    padding: 7px 10px;
+    font-size: .78rem;
     font-weight: 850;
 }
 
@@ -676,68 +719,38 @@ html { scroll-behavior: smooth; }
     gap: 18px;
 }
 
-.edu-card {
-    padding: 24px;
-}
-
-.edu-card h3 {
-    margin: 0 0 8px;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 1.15rem;
-    letter-spacing: -.03em;
-}
-
-.edu-degree {
-    color: var(--yellow);
-    font-weight: 800;
-    margin-bottom: 9px;
-}
-
 .edu-meta {
-    color: var(--muted);
-    margin-bottom: 14px;
-    line-height: 1.6;
-}
-
-.cgpa {
-    display: inline-flex;
-    padding: 8px 10px;
-    border-radius: 999px;
-    background: rgba(242,207,99,.09);
-    color: #fde9a2;
-    border: 1px solid rgba(242,207,99,.20);
-    font-weight: 850;
-    font-size: .85rem;
+    margin: 12px 0 0;
 }
 
 .contact-wrap {
-    padding: 96px 0 34px;
+    padding: 96px 0 36px;
 }
 
 .contact-card {
-    width: min(var(--max), calc(100vw - 40px));
-    margin: 0 auto;
-    padding: 34px;
+    border-radius: 34px;
+    padding: 36px;
     display: grid;
-    grid-template-columns: 1.08fr .92fr;
-    gap: 24px;
+    grid-template-columns: 1.05fr .95fr;
+    gap: 28px;
     align-items: center;
     background:
-        radial-gradient(circle at 0% 0%, rgba(242,207,99,.15), transparent 26%),
-        linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.035));
+        radial-gradient(circle at 0% 0%, rgba(251,113,133,.13), transparent 30%),
+        linear-gradient(135deg, rgba(167,139,250,.09), rgba(255,255,255,.04));
 }
 
 .contact-card h2 {
-    margin: 0;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: clamp(2rem, 4vw, 3.4rem);
+    margin: 12px 0 0;
+    color: white;
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(2rem, 4.4vw, 4.1rem);
     line-height: 1.02;
-    letter-spacing: -.07em;
+    letter-spacing: -.064em;
+    font-weight: 800;
 }
 
 .contact-card p {
     color: var(--muted);
-    margin-top: 12px;
     line-height: 1.7;
 }
 
@@ -751,204 +764,491 @@ html { scroll-behavior: smooth; }
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    padding: 14px;
-    border-radius: 17px;
-    background: rgba(255,255,255,.055);
-    border: 1px solid rgba(226,232,240,.13);
-    color: var(--text) !important;
+    color: white !important;
     text-decoration: none !important;
-    font-weight: 800;
+    padding: 16px;
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,.10);
+    background: rgba(255,255,255,.045);
+    font-weight: 850;
 }
 
-.contact-link span:first-child {
+.contact-link:hover {
+    color: var(--peach) !important;
+    border-color: rgba(251,113,133,.34);
+}
+
+.contact-link span {
     color: var(--muted);
-    font-size: .78rem;
+    font-size: .76rem;
     text-transform: uppercase;
-    letter-spacing: .10em;
+    letter-spacing: .16em;
 }
 
 .footer-line {
-    width: min(var(--max), calc(100vw - 40px));
-    margin: 0 auto;
-    padding: 28px 0 46px;
-    border-top: 1px solid rgba(226,232,240,.12);
-    color: var(--muted);
     display: flex;
     justify-content: space-between;
-    gap: 18px;
+    gap: 20px;
+    padding: 28px 0 48px;
+    border-top: 1px solid rgba(255,255,255,.10);
+    color: var(--muted);
     font-size: .9rem;
 }
 
-@media (max-width: 980px) {
-    .hero, .contact-card { grid-template-columns: 1fr; }
-    .metric-strip, .proof-grid { grid-template-columns: repeat(2, 1fr); }
-    .case-grid, .skills-grid, .edu-grid { grid-template-columns: 1fr; }
-    .profile-panel { max-width: 650px; }
+@media (max-width: 1050px) {
+    .hero,
+    .contact-card,
+    .case-body {
+        grid-template-columns: 1fr;
+    }
+
+    .metric-wrap,
+    .proof-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .profile-panel {
+        max-width: 720px;
+    }
 }
 
-@media (max-width: 720px) {
-    .nav-inner { height: auto; padding: 14px 0; align-items: flex-start; gap: 12px; flex-direction: column; }
-    .nav-links { width: 100%; overflow-x: auto; padding-bottom: 4px; }
-    .ticker-inner { overflow-x: auto; padding: 8px 0; }
-    .hero { padding-top: 50px; min-height: auto; }
-    .hero h1 { font-size: clamp(3rem, 15vw, 4.8rem); }
-    .capability-map { grid-template-columns: 1fr; }
-    .metric-strip, .proof-grid { grid-template-columns: 1fr; }
-    .section { padding-top: 72px; }
-    .timeline-top { flex-direction: column; }
-    .period { text-align: left; white-space: normal; }
-    .footer-line { flex-direction: column; }
+@media (max-width: 760px) {
+    .nav-inner {
+        height: auto;
+        padding: 16px 0;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-links {
+        width: 100%;
+        overflow-x: auto;
+        gap: 18px;
+        padding-bottom: 5px;
+    }
+
+    .resume-pill {
+        display: none;
+    }
+
+    .hero {
+        min-height: auto;
+        padding: 56px 0 30px;
+    }
+
+    .hero h1 {
+        font-size: clamp(2.45rem, 11vw, 4.1rem);
+    }
+
+    .snapshot-grid,
+    .metric-wrap,
+    .proof-grid,
+    .skills-grid,
+    .edu-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section {
+        padding-top: 72px;
+    }
+
+    .timeline-top {
+        flex-direction: column;
+    }
+
+    .period {
+        text-align: left;
+        white-space: normal;
+    }
+
+    .footer-line {
+        flex-direction: column;
+    }
 }
 </style>
 """
 
 HTML = f"""
-<div class="top-nav">
+<div class="site-nav">
   <div class="nav-inner">
-    <a class="brand" href="#top">Shalini Portfolio</a>
+    <a class="brand" href="#top">Shalini Pathak</a>
     <nav class="nav-links">
-      <a href="#proof">Proof</a>
       <a href="#case-studies">Case Studies</a>
       <a href="#skills">Skills</a>
       <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
       <a href="#contact">Contact</a>
     </nav>
+    <a class="resume-pill" href="{resume_href}" download="Shalini_Pathak_Resume.pdf">Resume</a>
   </div>
 </div>
 
 <div class="ticker">
   <div class="ticker-inner">
-    <span>60% fewer manual operations</span>
-    <span>78% faster batch processing</span>
-    <span>450+ portal users supported</span>
-    <span>99.95% service availability maintained</span>
-    <span>28% lower p95 API latency</span>
+    <div class="ticker-track">
+      <span>60% fewer manual operations</span>
+      <span>78% faster batch processing</span>
+      <span>450+ portal users supported</span>
+      <span>99.95% service availability maintained</span>
+      <span>28% lower p95 API latency</span>
+      <span>70% fewer audit findings</span>
+      <span>60% fewer manual operations</span>
+      <span>78% faster batch processing</span>
+      <span>450+ portal users supported</span>
+      <span>99.95% service availability maintained</span>
+      <span>28% lower p95 API latency</span>
+      <span>70% fewer audit findings</span>
+    </div>
   </div>
 </div>
 
 <div id="top"></div>
+
 <section class="hero">
   <div>
-    <div class="kicker">SAP Commerce Cloud Developer</div>
-    <h1>Shalini <span class="surname">Pathak</span></h1>
-    <div class="hero-title">Backend developer for enterprise commerce platforms.</div>
+    <div class="kicker">Shalini Pathak · SAP Commerce Cloud Developer</div>
+
+    <h1>
+      I build <span class="text-gradient">SAP Commerce backends, B2B portals and automation workflows</span>
+      that keep enterprise commerce running.
+    </h1>
+
     <p class="hero-copy">
-      I build SAP Commerce Cloud and SAP Hybris backend solutions across OCC APIs, Backoffice workflows, cron-job automation, data controls and production reliability for B2B customer portals.
+      Associate Software Developer at Collins Aerospace with 3+ years of experience building SAP Commerce Cloud
+      and SAP Hybris backend solutions across OCC APIs, Backoffice workflows, cron-job automation,
+      security controls and production reliability.
     </p>
-    <div class="meta-line">
-      <span class="meta-pill">Associate Software Developer at Collins Aerospace</span>
-      <span class="meta-pill">Bangalore, India</span>
-      <span class="meta-pill">3+ years experience</span>
+
+    <div class="hero-meta">
+      <p>Bangalore, India · Backend engineering · Enterprise B2B commerce platforms</p>
+      <p>Best fit: SAP Commerce Cloud, Hybris backend, OCC APIs and platform automation roles</p>
     </div>
+
     <div class="hero-actions">
-      <a class="btn btn-primary" href="#case-studies">View case studies</a>
-      <a class="btn btn-ghost" href="{resume_href}" download="Shalini_Pathak_Resume.pdf">Download resume</a>
-      <a class="btn btn-ghost" href="mailto:shalinipathak3@gmail.com">Email</a>
+      <a class="btn btn-primary" href="#case-studies">View Case Studies</a>
+      <a class="btn btn-secondary" href="{resume_href}" download="Shalini_Pathak_Resume.pdf">Download Resume</a>
+      <a class="btn btn-secondary" href="mailto:shalinipathak3@gmail.com">Email</a>
     </div>
   </div>
 
   <aside class="profile-panel">
-    <div class="panel-top">
-      <div class="panel-label">Commerce platform profile</div>
-      <div class="panel-status">Open to backend roles</div>
+    <div class="profile-head">
+      <div>
+        <div class="profile-role">Commerce platform snapshot</div>
+        <div class="profile-title">
+          Backend systems designed for scale, control and reliable B2B customer experiences.
+        </div>
+      </div>
+      <div class="status-pill">Open to backend roles</div>
     </div>
-    <div class="panel-title">Enterprise B2B systems designed for scale, control and reliability.</div>
-    <div class="capability-map">
-      <div class="capability-card"><strong>Commerce platform</strong><span>SAP Hybris, SAP Commerce Cloud, CCv2, Backoffice, WCMS, Solr and Impex-led migration flows.</span></div>
-      <div class="capability-card"><strong>API engineering</strong><span>Java, Spring MVC, RESTful services and OCC APIs connecting portal features with external systems.</span></div>
-      <div class="capability-card"><strong>Automation</strong><span>Cron jobs, workflow customization and reusable backend components that remove repetitive platform operations.</span></div>
-      <div class="capability-card"><strong>Security controls</strong><span>Role-based access, sensitive-data masking and row-level restrictions for enterprise data workflows.</span></div>
+
+    <div class="snapshot-grid">
+      <div class="snapshot-card">
+        <strong>Commerce platform</strong>
+        <span>SAP Hybris, SAP Commerce Cloud, CCv2, Backoffice, WCMS, Solr and Impex-led migration flows.</span>
+      </div>
+
+      <div class="snapshot-card">
+        <strong>API engineering</strong>
+        <span>Java, Spring MVC, RESTful services and OCC APIs connecting portal features with external systems.</span>
+      </div>
+
+      <div class="snapshot-card">
+        <strong>Automation</strong>
+        <span>Cron jobs, workflow customization and reusable backend components that remove repetitive platform operations.</span>
+      </div>
+
+      <div class="snapshot-card">
+        <strong>Security controls</strong>
+        <span>Role-based access, sensitive-data masking and row-level restrictions for enterprise data workflows.</span>
+      </div>
     </div>
-    <div class="availability-card"><strong>99.95%</strong><span>service availability maintained while supporting incidents, release delivery and customer portal performance.</span></div>
+
+    <div class="feature-card">
+      <strong>99.95%</strong>
+      <span>service availability maintained while supporting production incidents, release delivery and customer portal performance.</span>
+    </div>
   </aside>
 </section>
 
-<section class="metric-strip">
-  <div class="metric-card"><div class="metric-value">60%</div><div class="metric-label">manual operations reduced through SAP Commerce automation</div></div>
-  <div class="metric-card"><div class="metric-value">78%</div><div class="metric-label">batch processing improved from 18 minutes to 4 minutes</div></div>
-  <div class="metric-card"><div class="metric-value">450+</div><div class="metric-label">users supported through B2B customer portal initiatives</div></div>
-  <div class="metric-card"><div class="metric-value">28%</div><div class="metric-label">p95 API latency improvement across customer portal workflows</div></div>
+<section class="metric-wrap">
+  <div class="metric-card">
+    <div class="metric-value">60%</div>
+    <div class="metric-label">Manual operations reduced</div>
+    <div class="metric-note">SAP Commerce automation across recurring workflows</div>
+  </div>
+
+  <div class="metric-card">
+    <div class="metric-value">78%</div>
+    <div class="metric-label">Batch processing improved</div>
+    <div class="metric-note">18-minute process reduced to around 4 minutes</div>
+  </div>
+
+  <div class="metric-card">
+    <div class="metric-value">450+</div>
+    <div class="metric-label">Portal users supported</div>
+    <div class="metric-note">B2B self-service and customer portal workflows</div>
+  </div>
+
+  <div class="metric-card">
+    <div class="metric-value">99.95%</div>
+    <div class="metric-label">Service availability</div>
+    <div class="metric-note">Production support across release and incident cycles</div>
+  </div>
 </section>
 
-<div id="proof"></div>
 <section class="section">
-  <div class="section-heading">
+  <div class="section-head">
     <div class="section-eyebrow">Proof over keywords</div>
-    <h2>Built around shipped platform outcomes, not a long keyword list.</h2>
-    <p class="section-subtitle">The portfolio highlights the business problem, the technical contribution and the measurable result behind each SAP Commerce project.</p>
+    <h2>Skills shown through shipped platform outcomes.</h2>
+    <p class="section-subtitle">
+      The structure is not a resume copy, but a proof-led view of problems,
+      technical work and measurable results.
+    </p>
   </div>
+
   <div class="proof-grid">
-    <div class="proof-card"><strong>Commerce automation</strong><p>Hybris customizations, cron jobs, Impex scripts and Backoffice workflows built to reduce repetitive manual operations.</p></div>
-    <div class="proof-card"><strong>API delivery</strong><p>OCC and REST API development using Spring MVC for B2B portal workflows and external-system integration.</p></div>
-    <div class="proof-card"><strong>Data security</strong><p>Role-based access, sensitive-data masking and row-level restrictions aligned with enterprise platform standards.</p></div>
-    <div class="proof-card"><strong>Reliability</strong><p>P1/P2 incident handling, p95 latency optimization and release support across production customer portal environments.</p></div>
+    <div class="proof-card">
+      <strong>Commerce Automation</strong>
+      <p>Hybris customizations, cron jobs, Impex scripts and Backoffice workflows that reduce repeated platform operations.</p>
+    </div>
+
+    <div class="proof-card">
+      <strong>API Delivery</strong>
+      <p>OCC and REST API development using Java and Spring MVC for B2B portal and external-system integration.</p>
+    </div>
+
+    <div class="proof-card">
+      <strong>Security Controls</strong>
+      <p>Role-based access, sensitive-data masking and row-level restrictions for enterprise data workflows.</p>
+    </div>
+
+    <div class="proof-card">
+      <strong>Reliability</strong>
+      <p>P1/P2 incident handling, p95 latency improvement and production support for customer portal environments.</p>
+    </div>
   </div>
 </section>
 
 <div id="case-studies"></div>
+
 <section class="section">
-  <div class="section-heading">
-    <div class="section-eyebrow">Selected impact</div>
-    <h2>Case studies from SAP Commerce and B2B platform work.</h2>
-    <p class="section-subtitle">Each case focuses on a concrete engineering contribution instead of repeating a standard job description.</p>
+  <div class="section-head">
+    <div class="section-eyebrow">Industry case studies</div>
+    <h2>Real SAP Commerce problems solved across automation, APIs, security and reliability.</h2>
+    <p class="section-subtitle">
+      Each case uses a serious portfolio structure: problem, solution and measurable impact.
+    </p>
   </div>
+
   <div class="case-grid">
     <div class="case-card">
-      <div class="case-top"><span class="case-number">Case Study 01</span><div class="tags"><span class="tag">SAP Hybris</span><span class="tag">Cron Jobs</span><span class="tag">Impex</span></div></div>
+      <div class="case-top">
+        <span class="case-number">Case Study 01</span>
+        <div class="tags">
+          <span class="tag">SAP Hybris</span>
+          <span class="tag">Cron Jobs</span>
+          <span class="tag">Impex</span>
+        </div>
+      </div>
       <h3>B2B SAP Commerce Automation Suite</h3>
-      <p>Designed SAP Hybris B2B customizations, Backoffice customizations, Impex-based migration scripts and cron jobs to automate enterprise workflows.</p>
-      <ul class="impact-list"><li>Reduced manual operations by 60%</li><li>Improved batch processing from 18 minutes to 4 minutes</li><li>Supported Related SBU, SBU Offboarding, Project Hornet and Warranty Claims</li></ul>
+      <div class="case-body">
+        <div>
+          <div class="case-label">Problem</div>
+          <p>Manual B2B operations required repeatable backend automation across Backoffice, migration scripts and customer portal workflows.</p>
+        </div>
+        <div>
+          <div class="case-label">Solution and impact</div>
+          <p>Designed SAP Hybris B2B customizations, Impex-based migration scripts and cron jobs to automate enterprise commerce workflows.</p>
+          <ul class="impact-list">
+            <li>Reduced manual operations by 60%</li>
+            <li>Improved batch processing from 18 minutes to 4 minutes</li>
+            <li>Supported SBU, offboarding, warranty-claim and portal workflows</li>
+          </ul>
+        </div>
+      </div>
     </div>
 
     <div class="case-card">
-      <div class="case-top"><span class="case-number">Case Study 02</span><div class="tags"><span class="tag">OCC</span><span class="tag">Spring MVC</span><span class="tag">CCv2</span></div></div>
+      <div class="case-top">
+        <span class="case-number">Case Study 02</span>
+        <div class="tags">
+          <span class="tag">OCC</span>
+          <span class="tag">Spring MVC</span>
+          <span class="tag">CCv2</span>
+        </div>
+      </div>
       <h3>Headless B2B Portal APIs</h3>
-      <p>Built and customized OCC web services and RESTful APIs in SAP Commerce Cloud to connect B2B portal functionality with external systems.</p>
-      <ul class="impact-list"><li>Enabled smoother B2B portal functionality</li><li>Supported self-service access for 450+ users</li><li>Contributed to a 12-point increase in Customer Portal satisfaction</li></ul>
+      <div class="case-body">
+        <div>
+          <div class="case-label">Problem</div>
+          <p>B2B portal features needed stable API connections between SAP Commerce Cloud and external enterprise systems.</p>
+        </div>
+        <div>
+          <div class="case-label">Solution and impact</div>
+          <p>Built and customized OCC web services and RESTful APIs in SAP Commerce Cloud to support headless portal functionality.</p>
+          <ul class="impact-list">
+            <li>Enabled smoother B2B portal functionality</li>
+            <li>Supported self-service access for 450+ users</li>
+            <li>Contributed to a 12-point increase in customer portal satisfaction</li>
+          </ul>
+        </div>
+      </div>
     </div>
 
     <div class="case-card">
-      <div class="case-top"><span class="case-number">Case Study 03</span><div class="tags"><span class="tag">RBAC</span><span class="tag">PII Masking</span><span class="tag">Security</span></div></div>
+      <div class="case-top">
+        <span class="case-number">Case Study 03</span>
+        <div class="tags">
+          <span class="tag">RBAC</span>
+          <span class="tag">PII Masking</span>
+          <span class="tag">Security</span>
+        </div>
+      </div>
       <h3>Enterprise Data Protection Controls</h3>
-      <p>Architected data-protection controls for enterprise workflows, including role-based access, sensitive-data masking and row-level restrictions.</p>
-      <ul class="impact-list"><li>Reduced audit findings by 70%</li><li>Aligned platform controls with SAP Commerce security practices</li><li>Improved handling of sensitive enterprise data</li></ul>
+      <div class="case-body">
+        <div>
+          <div class="case-label">Problem</div>
+          <p>Enterprise workflows required stricter access control and cleaner handling of sensitive platform data.</p>
+        </div>
+        <div>
+          <div class="case-label">Solution and impact</div>
+          <p>Architected controls including role-based access, sensitive-data masking and row-level restrictions within SAP Commerce workflows.</p>
+          <ul class="impact-list">
+            <li>Reduced audit findings by 70%</li>
+            <li>Aligned controls with SAP Commerce security practices</li>
+            <li>Improved sensitive-data handling for enterprise workflows</li>
+          </ul>
+        </div>
+      </div>
     </div>
 
     <div class="case-card">
-      <div class="case-top"><span class="case-number">Case Study 04</span><div class="tags"><span class="tag">Performance</span><span class="tag">Production</span><span class="tag">Reliability</span></div></div>
+      <div class="case-top">
+        <span class="case-number">Case Study 04</span>
+        <div class="tags">
+          <span class="tag">Performance</span>
+          <span class="tag">Production</span>
+          <span class="tag">Reliability</span>
+        </div>
+      </div>
       <h3>Customer Portal Performance and Reliability</h3>
-      <p>Diagnosed critical P1/P2 incidents, improved backend performance and collaborated with Product, QA and DevOps to keep releases on track.</p>
-      <ul class="impact-list"><li>Maintained 99.95% service availability</li><li>Improved p95 API latency by 28%</li><li>Achieved 1.8-hour MTTR for critical incidents</li></ul>
+      <div class="case-body">
+        <div>
+          <div class="case-label">Problem</div>
+          <p>Critical portal incidents and backend latency affected customer-facing reliability and release confidence.</p>
+        </div>
+        <div>
+          <div class="case-label">Solution and impact</div>
+          <p>Diagnosed P1/P2 incidents, improved backend performance and collaborated with Product, QA and DevOps during release cycles.</p>
+          <ul class="impact-list">
+            <li>Maintained 99.95% service availability</li>
+            <li>Improved p95 API latency by 28%</li>
+            <li>Achieved 1.8-hour MTTR for critical incidents</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <div id="skills"></div>
+
 <section class="section">
-  <div class="section-heading">
+  <div class="section-head">
     <div class="section-eyebrow">Technical stack</div>
-    <h2>Skills grouped by how they are used in enterprise commerce delivery.</h2>
-    <p class="section-subtitle">The stack is grouped by delivery context instead of a long keyword dump.</p>
+    <h2>Grouped by how the work is delivered.</h2>
+    <p class="section-subtitle">
+      A cleaner skills section for recruiters and hiring managers, without turning the page into a keyword dump.
+    </p>
   </div>
+
   <div class="skills-grid">
-    <div class="skill-card"><div class="skill-title"><span class="skill-badge">SAP</span><h3>SAP Commerce Cloud</h3></div><div class="chips"><span class="chip">Hybris Core Architecture</span><span class="chip">CCv2</span><span class="chip">OCC / Headless</span><span class="chip">Backoffice Customization</span><span class="chip">WCMS</span><span class="chip">Impex</span><span class="chip">Cron Jobs</span><span class="chip">Solr</span><span class="chip">Hot Folder</span><span class="chip">Populators & Converters</span><span class="chip">Events</span><span class="chip">Interceptors</span><span class="chip">Restrictions</span><span class="chip">Cart & Checkout</span></div></div>
-    <div class="skill-card"><div class="skill-title"><span class="skill-badge">API</span><h3>Backend Engineering</h3></div><div class="chips"><span class="chip">Java</span><span class="chip">Spring MVC</span><span class="chip">Spring Hibernate</span><span class="chip">RESTful APIs</span><span class="chip">Microservices Architecture</span><span class="chip">System Design</span><span class="chip">Performance Optimization</span><span class="chip">Code Review</span></div></div>
-    <div class="skill-card"><div class="skill-title"><span class="skill-badge">Data</span><h3>Data and Security</h3></div><div class="chips"><span class="chip">SQL</span><span class="chip">MySQL</span><span class="chip">Oracle</span><span class="chip">DBMS / RDBMS</span><span class="chip">Data Modeling</span><span class="chip">RBAC</span><span class="chip">PII Masking</span><span class="chip">Row-level Security</span><span class="chip">JSON</span><span class="chip">XML</span></div></div>
-    <div class="skill-card"><div class="skill-title"><span class="skill-badge">Ops</span><h3>DevOps and Tools</h3></div><div class="chips"><span class="chip">Git</span><span class="chip">Jenkins</span><span class="chip">Azure DevOps</span><span class="chip">CI/CD Pipelines</span><span class="chip">Eclipse</span><span class="chip">IntelliJ IDEA</span><span class="chip">Agile Delivery</span><span class="chip">QA Collaboration</span></div></div>
+    <div class="skill-card">
+      <h3>SAP Commerce Cloud</h3>
+      <div class="chips">
+        <span class="chip">SAP Hybris</span>
+        <span class="chip">CCv2</span>
+        <span class="chip">OCC / Headless</span>
+        <span class="chip">Backoffice</span>
+        <span class="chip">WCMS</span>
+        <span class="chip">Impex</span>
+        <span class="chip">Cron Jobs</span>
+        <span class="chip">Solr</span>
+        <span class="chip">Hot Folder</span>
+        <span class="chip">Populators</span>
+        <span class="chip">Converters</span>
+        <span class="chip">Interceptors</span>
+        <span class="chip">Restrictions</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <h3>Backend Engineering</h3>
+      <div class="chips">
+        <span class="chip">Java</span>
+        <span class="chip">Spring MVC</span>
+        <span class="chip">Spring Hibernate</span>
+        <span class="chip">RESTful APIs</span>
+        <span class="chip">Microservices</span>
+        <span class="chip">System Design</span>
+        <span class="chip">Performance Optimization</span>
+        <span class="chip">Code Review</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <h3>Data and Security</h3>
+      <div class="chips">
+        <span class="chip">SQL</span>
+        <span class="chip">MySQL</span>
+        <span class="chip">Oracle</span>
+        <span class="chip">DBMS</span>
+        <span class="chip">Data Modeling</span>
+        <span class="chip">RBAC</span>
+        <span class="chip">PII Masking</span>
+        <span class="chip">Row-level Security</span>
+        <span class="chip">JSON</span>
+        <span class="chip">XML</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <h3>Delivery Tools</h3>
+      <div class="chips">
+        <span class="chip">Git</span>
+        <span class="chip">Jenkins</span>
+        <span class="chip">Azure DevOps</span>
+        <span class="chip">CI/CD</span>
+        <span class="chip">Eclipse</span>
+        <span class="chip">IntelliJ IDEA</span>
+        <span class="chip">Agile</span>
+        <span class="chip">QA Collaboration</span>
+      </div>
+    </div>
   </div>
 </section>
 
 <div id="experience"></div>
+
 <section class="section">
-  <div class="section-heading">
-    <div class="section-eyebrow">Work history</div>
-    <h2>Where the work has been applied.</h2>
+  <div class="section-head">
+    <div class="section-eyebrow">Experience</div>
+    <h2>Where the platform work has been applied.</h2>
   </div>
+
   <div class="timeline-card">
     <div class="timeline-top">
-      <div><h3>Associate Software Developer</h3><div class="company">Collins Aerospace - Bangalore, India</div></div>
-      <div class="period">Feb 2023 - Present<br><span class="active-pill">Current role</span></div>
+      <div>
+        <h3>Associate Software Developer</h3>
+        <div class="company">Collins Aerospace · Bangalore, India</div>
+      </div>
+      <div class="period">
+        Feb 2023 - Present<br>
+        <span class="active-pill">Current role</span>
+      </div>
     </div>
+
     <ul class="impact-list">
       <li>Designed and implemented SAP Hybris B2B customizations, Backoffice workflows, Impex scripts, cron jobs, WCMS components and customer portal dashboards.</li>
       <li>Delivered 3+ high-impact automation initiatives that reduced user task time by 40% and enabled self-service data access for 450+ users.</li>
@@ -957,18 +1257,33 @@ HTML = f"""
   </div>
 </section>
 
+<div id="education"></div>
+
 <section class="section">
-  <div class="section-heading">
+  <div class="section-head">
     <div class="section-eyebrow">Education</div>
     <h2>Academic background.</h2>
   </div>
+
   <div class="edu-grid">
-    <div class="edu-card"><h3>PES University, Bangalore</h3><div class="edu-degree">Master of Computer Applications</div><div class="edu-meta">Dec 2021 - Jul 2023. Relevant coursework: Machine Learning, Design and Analysis of Algorithms, Data Visualization, Java</div><span class="cgpa">CGPA 8.28 / 10</span></div>
-    <div class="edu-card"><h3>Lalit Narayan Mishra Institute, Patna</h3><div class="edu-degree">Bachelor of Computer Applications</div><div class="edu-meta">Aug 2017 - Jul 2020. Relevant coursework: Data Structures, DBMS, Web Development, Statistics</div><span class="cgpa">CGPA 7.9 / 10</span></div>
+    <div class="edu-card">
+      <h3>PES University, Bangalore</h3>
+      <div class="edu-degree">Master of Computer Applications</div>
+      <div class="edu-meta">Dec 2021 - Jul 2023 · Machine Learning, Design and Analysis of Algorithms, Data Visualization, Java</div>
+      <span class="cgpa">CGPA 8.28 / 10</span>
+    </div>
+
+    <div class="edu-card">
+      <h3>Lalit Narayan Mishra Institute, Patna</h3>
+      <div class="edu-degree">Bachelor of Computer Applications</div>
+      <div class="edu-meta">Aug 2017 - Jul 2020 · Data Structures, DBMS, Web Development, Statistics</div>
+      <span class="cgpa">CGPA 7.9 / 10</span>
+    </div>
   </div>
 </section>
 
 <div id="contact"></div>
+
 <div class="contact-wrap">
   <div class="contact-card">
     <div>
@@ -976,10 +1291,22 @@ HTML = f"""
       <h2>Open to SAP Commerce, backend and B2B platform roles.</h2>
       <p>Best fit: SAP Commerce Cloud, Hybris backend, OCC API development, enterprise portal engineering and platform automation roles.</p>
     </div>
+
     <div class="contact-links">
-      <a class="contact-link" href="mailto:shalinipathak3@gmail.com"><span>Email</span><strong>shalinipathak3@gmail.com</strong></a>
-      <a class="contact-link" href="https://www.linkedin.com/in/shalini-pathak-6bb331216/" target="_blank"><span>LinkedIn</span><strong>View Profile</strong></a>
-      <a class="contact-link" href="{resume_href}" download="Shalini_Pathak_Resume.pdf"><span>Resume</span><strong>Download PDF</strong></a>
+      <a class="contact-link" href="mailto:shalinipathak3@gmail.com">
+        <span>Email</span>
+        <strong>shalinipathak3@gmail.com</strong>
+      </a>
+
+      <a class="contact-link" href="https://www.linkedin.com/in/shalini-pathak-6bb331216/" target="_blank">
+        <span>LinkedIn</span>
+        <strong>View Profile</strong>
+      </a>
+
+      <a class="contact-link" href="{resume_href}" download="Shalini_Pathak_Resume.pdf">
+        <span>Resume</span>
+        <strong>Download PDF</strong>
+      </a>
     </div>
   </div>
 </div>
