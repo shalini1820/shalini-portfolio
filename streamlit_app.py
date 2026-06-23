@@ -17,7 +17,6 @@ st.set_page_config(
 
 
 def pdf_download_link(path: Path) -> str:
-    """Return a browser download link for the resume PDF."""
     if not path.exists():
         return "#"
     encoded = base64.b64encode(path.read_bytes()).decode("utf-8")
@@ -28,39 +27,39 @@ resume_href = pdf_download_link(RESUME_PATH)
 
 CSS = """
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
 
 :root {
-    --bg: #050b14;
-    --bg-2: #071522;
-    --panel: rgba(255, 255, 255, 0.055);
-    --panel-2: rgba(255, 255, 255, 0.085);
-    --line: rgba(148, 163, 184, 0.18);
-    --line-strong: rgba(125, 211, 252, 0.34);
-    --text: #eff7ff;
-    --muted: #9db1c7;
-    --soft: #c7d6e5;
-    --blue: #38bdf8;
-    --cyan: #22d3ee;
-    --green: #34d399;
-    --ink: #03111f;
+    --bg: #070b12;
+    --bg-2: #0b111c;
+    --panel: rgba(255, 255, 255, 0.065);
+    --panel-soft: rgba(255, 255, 255, 0.04);
+    --border: rgba(226, 232, 240, 0.13);
+    --border-strong: rgba(236, 201, 75, 0.34);
+    --text: #f8fafc;
+    --muted: #aab6c5;
+    --soft: #d7dee8;
+    --yellow: #f2cf63;
+    --green: #8ee8bd;
+    --cyan: #8bd8ff;
+    --ink: #09111c;
     --max: 1180px;
     --radius-xl: 34px;
     --radius-lg: 24px;
-    --radius-md: 16px;
-    --shadow: 0 28px 90px rgba(0, 0, 0, 0.32);
+    --radius-md: 18px;
+    --shadow: 0 28px 90px rgba(0, 0, 0, 0.34);
 }
 
 html { scroll-behavior: smooth; }
 
 .stApp {
     background:
-        radial-gradient(circle at 10% 5%, rgba(56,189,248,.20), transparent 30%),
-        radial-gradient(circle at 88% 8%, rgba(52,211,153,.13), transparent 28%),
-        radial-gradient(circle at 70% 80%, rgba(14,165,233,.12), transparent 30%),
-        linear-gradient(135deg, #050b14 0%, #071522 48%, #030712 100%);
+        radial-gradient(circle at 82% 8%, rgba(242, 207, 99, .14), transparent 30%),
+        radial-gradient(circle at 15% 24%, rgba(139, 216, 255, .13), transparent 34%),
+        radial-gradient(circle at 72% 84%, rgba(142, 232, 189, .10), transparent 32%),
+        linear-gradient(135deg, #070b12 0%, #0b111c 54%, #060914 100%);
     color: var(--text);
-    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Manrope', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 #MainMenu, header, footer, [data-testid="stSidebar"], [data-testid="collapsedControl"] {
@@ -79,45 +78,29 @@ html { scroll-behavior: smooth; }
     top: 0;
     z-index: 999;
     backdrop-filter: blur(22px);
-    background: rgba(5, 11, 20, .78);
-    border-bottom: 1px solid rgba(148,163,184,.13);
+    background: rgba(7, 11, 18, .80);
+    border-bottom: 1px solid rgba(226,232,240,.10);
 }
 
 .nav-inner {
     width: min(var(--max), calc(100vw - 40px));
-    height: 74px;
+    height: 72px;
     margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 22px;
 }
 
 .brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    text-decoration: none !important;
     color: var(--text) !important;
-    font-weight: 850;
-    letter-spacing: -.02em;
-}
-
-.brand-line {
-    width: 36px;
-    height: 36px;
-    border-radius: 14px;
-    background:
-        linear-gradient(135deg, rgba(56,189,248,.95), rgba(52,211,153,.92));
-    box-shadow: 0 15px 34px rgba(56,189,248,.18);
-    position: relative;
-}
-
-.brand-line::after {
-    content: '';
-    position: absolute;
-    inset: 10px;
-    border-radius: 8px;
-    background: rgba(3, 17, 31, .72);
+    text-decoration: none !important;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: .92rem;
+    font-weight: 800;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    white-space: nowrap;
 }
 
 .nav-links {
@@ -130,6 +113,7 @@ html { scroll-behavior: smooth; }
     color: var(--muted) !important;
     text-decoration: none !important;
     font-size: .88rem;
+    font-weight: 700;
     padding: 10px 13px;
     border-radius: 999px;
     border: 1px solid transparent;
@@ -138,73 +122,109 @@ html { scroll-behavior: smooth; }
 
 .nav-links a:hover {
     color: var(--text) !important;
-    border-color: rgba(125,211,252,.25);
-    background: rgba(255,255,255,.045);
+    background: rgba(255,255,255,.055);
+    border-color: rgba(226,232,240,.14);
+}
+
+.ticker {
+    border-bottom: 1px solid rgba(226,232,240,.08);
+    background: rgba(255,255,255,.025);
+    overflow: hidden;
+}
+
+.ticker-inner {
+    width: min(var(--max), calc(100vw - 40px));
+    margin: 0 auto;
+    min-height: 38px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    color: var(--muted);
+    font-size: .82rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.ticker-inner span::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin-right: 9px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 0 5px rgba(142,232,189,.10);
 }
 
 .hero {
     width: min(var(--max), calc(100vw - 40px));
     margin: 0 auto;
-    min-height: calc(100vh - 74px);
+    min-height: calc(100vh - 110px);
     display: grid;
-    grid-template-columns: 1.08fr .92fr;
+    grid-template-columns: 1.02fr .98fr;
     align-items: center;
-    gap: 44px;
-    padding: 76px 0 56px;
+    gap: 52px;
+    padding: 76px 0 62px;
 }
 
-.eyebrow-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 12px;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    background: rgba(255,255,255,.052);
-    color: var(--soft);
+.kicker {
+    color: var(--yellow);
     font-size: .86rem;
-    margin-bottom: 22px;
-}
-
-.signal {
-    width: 8px;
-    height: 8px;
-    border-radius: 999px;
-    background: var(--green);
-    box-shadow: 0 0 0 7px rgba(52,211,153,.10);
+    font-weight: 800;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
 }
 
 .hero h1 {
     margin: 0;
-    max-width: 860px;
-    font-size: clamp(2.8rem, 6.1vw, 6.2rem);
-    line-height: .94;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: clamp(3.3rem, 8vw, 7.4rem);
+    line-height: .88;
     letter-spacing: -.075em;
-    font-weight: 900;
+    font-weight: 800;
 }
 
-.gradient-text {
-    background: linear-gradient(120deg, #ffffff 8%, #9be7ff 48%, #b7ffe5 86%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+.hero h1 .surname {
+    color: var(--yellow);
 }
 
-.hero-name {
+.hero-title {
     margin-top: 22px;
-    color: var(--blue);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: clamp(.95rem, 1.5vw, 1.15rem);
-    font-weight: 700;
-    letter-spacing: -.015em;
+    max-width: 740px;
+    color: var(--text);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: clamp(1.55rem, 2.7vw, 2.45rem);
+    line-height: 1.14;
+    letter-spacing: -.045em;
+    font-weight: 750;
 }
 
 .hero-copy {
     margin: 18px 0 0;
     max-width: 730px;
     color: var(--soft);
-    font-size: clamp(1rem, 1.5vw, 1.16rem);
-    line-height: 1.78;
+    font-size: clamp(1rem, 1.35vw, 1.12rem);
+    line-height: 1.76;
+}
+
+.meta-line {
+    margin-top: 22px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.meta-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 9px 12px;
+    border-radius: 999px;
+    color: var(--soft);
+    background: rgba(255,255,255,.055);
+    border: 1px solid rgba(226,232,240,.12);
+    font-size: .86rem;
+    font-weight: 700;
 }
 
 .hero-actions {
@@ -218,156 +238,152 @@ html { scroll-behavior: smooth; }
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 13px 18px;
+    padding: 14px 18px;
     border-radius: 999px;
     text-decoration: none !important;
-    font-weight: 760;
-    font-size: .95rem;
-    border: 1px solid var(--line);
+    font-weight: 800;
+    font-size: .94rem;
+    border: 1px solid var(--border);
     transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
 }
 
 .btn:hover { transform: translateY(-2px); }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--blue), var(--green));
+    background: linear-gradient(135deg, var(--yellow), var(--green));
     color: var(--ink) !important;
-    box-shadow: 0 18px 40px rgba(56,189,248,.22);
     border-color: rgba(255,255,255,.12);
+    box-shadow: 0 18px 42px rgba(242,207,99,.20);
 }
 
 .btn-ghost {
-    background: rgba(255,255,255,.055);
     color: var(--text) !important;
+    background: rgba(255,255,255,.055);
 }
 
-.system-card {
+.profile-panel {
     position: relative;
-    border: 1px solid var(--line);
+    border: 1px solid var(--border);
     border-radius: var(--radius-xl);
     background:
-        linear-gradient(180deg, rgba(255,255,255,.095), rgba(255,255,255,.038)),
-        radial-gradient(circle at 14% 0%, rgba(56,189,248,.18), transparent 34%);
+        radial-gradient(circle at 88% 0%, rgba(242,207,99,.16), transparent 34%),
+        linear-gradient(180deg, rgba(255,255,255,.085), rgba(255,255,255,.036));
     box-shadow: var(--shadow);
     overflow: hidden;
+    padding: 26px;
 }
 
-.system-card::before {
+.profile-panel::before {
     content: '';
     position: absolute;
     inset: -1px;
-    pointer-events: none;
     padding: 1px;
     border-radius: inherit;
-    background: linear-gradient(135deg, rgba(56,189,248,.33), transparent 38%, rgba(52,211,153,.22));
+    pointer-events: none;
+    background: linear-gradient(135deg, rgba(242,207,99,.38), transparent 42%, rgba(142,232,189,.22));
     mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     mask-composite: exclude;
     -webkit-mask-composite: xor;
 }
 
-.card-header {
+.panel-top {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 18px 20px;
-    border-bottom: 1px solid rgba(148,163,184,.13);
+    gap: 16px;
+    align-items: flex-start;
+    margin-bottom: 26px;
 }
 
-.window-dots {
-    display: flex;
-    gap: 7px;
-}
-
-.window-dots span {
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    background: rgba(203,213,225,.42);
-}
-
-.card-label {
-    color: var(--muted);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: .78rem;
-}
-
-.system-body {
-    padding: 28px;
-}
-
-.platform-title {
-    color: var(--text);
-    font-size: 1.55rem;
-    line-height: 1.18;
-    letter-spacing: -.045em;
+.panel-label {
+    color: var(--yellow);
+    font-size: .76rem;
     font-weight: 850;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+}
+
+.panel-status {
+    padding: 7px 10px;
+    border-radius: 999px;
+    color: #dffbea;
+    background: rgba(142,232,189,.09);
+    border: 1px solid rgba(142,232,189,.22);
+    font-size: .78rem;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.panel-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: clamp(1.7rem, 2.8vw, 2.5rem);
+    line-height: 1.08;
+    letter-spacing: -.055em;
+    font-weight: 800;
     margin-bottom: 20px;
 }
 
-.architecture-grid {
+.capability-map {
     display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 12px;
 }
 
-.architecture-row {
-    display: grid;
-    grid-template-columns: 128px 1fr;
-    gap: 14px;
-    align-items: center;
-    padding: 14px;
-    border: 1px solid rgba(148,163,184,.14);
-    border-radius: 18px;
-    background: rgba(255,255,255,.04);
-}
-
-.architecture-row strong {
-    color: #dff7ff;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: .8rem;
-    text-transform: uppercase;
-    letter-spacing: .08em;
-}
-
-.architecture-row span {
-    color: var(--muted);
-    line-height: 1.45;
-    font-size: .93rem;
-}
-
-.availability-band {
-    margin-top: 20px;
-    padding: 18px;
+.capability-card {
+    min-height: 138px;
+    padding: 16px;
+    border: 1px solid rgba(226,232,240,.13);
     border-radius: 22px;
-    background: linear-gradient(135deg, rgba(56,189,248,.12), rgba(52,211,153,.10));
-    border: 1px solid rgba(125,211,252,.20);
+    background: rgba(255,255,255,.045);
 }
 
-.availability-band .big {
+.capability-card strong {
     display: block;
-    font-size: 2.5rem;
-    line-height: .95;
-    letter-spacing: -.06em;
-    font-weight: 900;
+    color: var(--text);
+    font-size: 1rem;
+    margin-bottom: 8px;
 }
 
-.availability-band .small {
+.capability-card span {
     display: block;
     color: var(--muted);
-    margin-top: 8px;
-    line-height: 1.5;
+    line-height: 1.55;
+    font-size: .9rem;
+}
+
+.availability-card {
+    margin-top: 14px;
+    padding: 20px;
+    border-radius: 24px;
+    border: 1px solid rgba(242,207,99,.20);
+    background: linear-gradient(135deg, rgba(242,207,99,.12), rgba(142,232,189,.09));
+}
+
+.availability-card strong {
+    display: block;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 2.55rem;
+    line-height: .95;
+    letter-spacing: -.065em;
+}
+
+.availability-card span {
+    display: block;
+    color: var(--soft);
+    margin-top: 9px;
+    line-height: 1.55;
 }
 
 .metric-strip {
     width: min(var(--max), calc(100vw - 40px));
-    margin: -6px auto 0;
+    margin: -8px auto 0;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 14px;
 }
 
 .metric-card {
-    border: 1px solid var(--line);
+    border: 1px solid var(--border);
     background: rgba(255,255,255,.052);
     border-radius: 22px;
     padding: 22px;
@@ -375,17 +391,19 @@ html { scroll-behavior: smooth; }
 }
 
 .metric-value {
-    font-size: clamp(1.7rem, 3vw, 2.45rem);
-    font-weight: 900;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 800;
     letter-spacing: -.06em;
     color: var(--text);
 }
 
 .metric-label {
     color: var(--muted);
-    margin-top: 6px;
+    margin-top: 7px;
     line-height: 1.45;
     font-size: .93rem;
+    font-weight: 600;
 }
 
 .section {
@@ -395,22 +413,22 @@ html { scroll-behavior: smooth; }
 }
 
 .section-heading {
-    max-width: 760px;
+    max-width: 800px;
     margin-bottom: 34px;
 }
 
 .section-eyebrow {
-    color: var(--green);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: .82rem;
-    letter-spacing: .12em;
+    color: var(--yellow);
+    font-size: .8rem;
+    letter-spacing: .18em;
     text-transform: uppercase;
-    font-weight: 700;
-    margin-bottom: 10px;
+    font-weight: 850;
+    margin-bottom: 12px;
 }
 
 .section h2 {
-    font-size: clamp(2.1rem, 4.1vw, 4rem);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: clamp(2.15rem, 4.2vw, 4rem);
     line-height: 1.02;
     letter-spacing: -.07em;
     margin: 0;
@@ -418,7 +436,7 @@ html { scroll-behavior: smooth; }
 
 .section-subtitle {
     color: var(--muted);
-    margin-top: 14px;
+    margin-top: 15px;
     font-size: 1.03rem;
     line-height: 1.72;
 }
@@ -430,10 +448,10 @@ html { scroll-behavior: smooth; }
 }
 
 .proof-card, .case-card, .skill-card, .timeline-card, .edu-card, .contact-card {
-    border: 1px solid var(--line);
-    background: linear-gradient(180deg, rgba(255,255,255,.064), rgba(255,255,255,.034));
+    border: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(255,255,255,.066), rgba(255,255,255,.033));
     border-radius: var(--radius-lg);
-    box-shadow: 0 20px 48px rgba(2,6,23,.16);
+    box-shadow: 0 20px 48px rgba(2,6,23,.18);
 }
 
 .proof-card {
@@ -442,6 +460,7 @@ html { scroll-behavior: smooth; }
 
 .proof-card strong {
     display: block;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 1.05rem;
     margin-bottom: 8px;
 }
@@ -470,7 +489,7 @@ html { scroll-behavior: smooth; }
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background: radial-gradient(circle at 90% 0%, rgba(56,189,248,.12), transparent 28%);
+    background: radial-gradient(circle at 92% 0%, rgba(242,207,99,.12), transparent 30%);
 }
 
 .case-top {
@@ -484,12 +503,11 @@ html { scroll-behavior: smooth; }
 }
 
 .case-number {
-    color: var(--blue);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: .82rem;
-    font-weight: 700;
+    color: var(--yellow);
+    font-size: .8rem;
+    font-weight: 850;
     text-transform: uppercase;
-    letter-spacing: .08em;
+    letter-spacing: .12em;
 }
 
 .tags {
@@ -502,15 +520,16 @@ html { scroll-behavior: smooth; }
 .tag {
     display: inline-flex;
     padding: 6px 9px;
-    border: 1px solid rgba(125,211,252,.21);
-    background: rgba(56,189,248,.07);
-    color: #bceeff;
+    border: 1px solid rgba(242,207,99,.21);
+    background: rgba(242,207,99,.07);
+    color: #fde9a2;
     border-radius: 999px;
     font-size: .74rem;
-    font-weight: 750;
+    font-weight: 800;
 }
 
 .case-card h3 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 1.35rem;
     letter-spacing: -.035em;
     margin: 0 0 12px;
@@ -551,7 +570,7 @@ html { scroll-behavior: smooth; }
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--blue), var(--green));
+    background: linear-gradient(135deg, var(--yellow), var(--green));
 }
 
 .skills-grid {
@@ -572,21 +591,21 @@ html { scroll-behavior: smooth; }
 }
 
 .skill-badge {
-    width: 44px;
+    min-width: 44px;
     height: 44px;
     display: grid;
     place-items: center;
     border-radius: 15px;
-    background: rgba(56,189,248,.11);
-    border: 1px solid rgba(125,211,252,.18);
-    color: #bceeff;
-    font-family: 'JetBrains Mono', monospace;
+    background: rgba(242,207,99,.10);
+    border: 1px solid rgba(242,207,99,.18);
+    color: #fde9a2;
     font-size: .78rem;
-    font-weight: 800;
+    font-weight: 850;
 }
 
 .skill-title h3 {
     margin: 0;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 1.15rem;
     letter-spacing: -.03em;
 }
@@ -602,8 +621,9 @@ html { scroll-behavior: smooth; }
     border-radius: 999px;
     background: rgba(255,255,255,.055);
     color: var(--soft);
-    border: 1px solid rgba(148,163,184,.16);
+    border: 1px solid rgba(226,232,240,.13);
     font-size: .84rem;
+    font-weight: 700;
 }
 
 .timeline-card {
@@ -614,27 +634,28 @@ html { scroll-behavior: smooth; }
     display: flex;
     justify-content: space-between;
     gap: 24px;
-    border-bottom: 1px solid rgba(148,163,184,.14);
+    border-bottom: 1px solid rgba(226,232,240,.12);
     padding-bottom: 20px;
     margin-bottom: 20px;
 }
 
 .timeline-card h3 {
     margin: 0 0 7px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 1.45rem;
     letter-spacing: -.04em;
 }
 
 .company {
-    color: var(--blue);
-    font-weight: 700;
+    color: var(--yellow);
+    font-weight: 800;
 }
 
 .period {
     color: var(--muted);
-    font-family: 'JetBrains Mono', monospace;
     white-space: nowrap;
     text-align: right;
+    font-weight: 700;
 }
 
 .active-pill {
@@ -642,12 +663,11 @@ html { scroll-behavior: smooth; }
     margin-top: 8px;
     padding: 5px 9px;
     border-radius: 999px;
-    background: rgba(52,211,153,.10);
-    color: #a7f3d0;
-    border: 1px solid rgba(52,211,153,.20);
-    font-family: 'Inter', sans-serif;
+    background: rgba(142,232,189,.10);
+    color: #c2f7d8;
+    border: 1px solid rgba(142,232,189,.20);
     font-size: .75rem;
-    font-weight: 800;
+    font-weight: 850;
 }
 
 .edu-grid {
@@ -662,29 +682,31 @@ html { scroll-behavior: smooth; }
 
 .edu-card h3 {
     margin: 0 0 8px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 1.15rem;
     letter-spacing: -.03em;
 }
 
 .edu-degree {
-    color: var(--blue);
-    font-weight: 750;
+    color: var(--yellow);
+    font-weight: 800;
     margin-bottom: 9px;
 }
 
 .edu-meta {
     color: var(--muted);
     margin-bottom: 14px;
+    line-height: 1.6;
 }
 
 .cgpa {
     display: inline-flex;
     padding: 8px 10px;
     border-radius: 999px;
-    background: rgba(56,189,248,.09);
-    color: #c9f4ff;
-    border: 1px solid rgba(56,189,248,.20);
-    font-weight: 800;
+    background: rgba(242,207,99,.09);
+    color: #fde9a2;
+    border: 1px solid rgba(242,207,99,.20);
+    font-weight: 850;
     font-size: .85rem;
 }
 
@@ -701,12 +723,13 @@ html { scroll-behavior: smooth; }
     gap: 24px;
     align-items: center;
     background:
-        radial-gradient(circle at 0% 0%, rgba(56,189,248,.15), transparent 26%),
+        radial-gradient(circle at 0% 0%, rgba(242,207,99,.15), transparent 26%),
         linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.035));
 }
 
 .contact-card h2 {
     margin: 0;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: clamp(2rem, 4vw, 3.4rem);
     line-height: 1.02;
     letter-spacing: -.07em;
@@ -731,25 +754,24 @@ html { scroll-behavior: smooth; }
     padding: 14px;
     border-radius: 17px;
     background: rgba(255,255,255,.055);
-    border: 1px solid rgba(148,163,184,.16);
+    border: 1px solid rgba(226,232,240,.13);
     color: var(--text) !important;
     text-decoration: none !important;
-    font-weight: 700;
+    font-weight: 800;
 }
 
 .contact-link span:first-child {
     color: var(--muted);
-    font-family: 'JetBrains Mono', monospace;
     font-size: .78rem;
     text-transform: uppercase;
-    letter-spacing: .08em;
+    letter-spacing: .10em;
 }
 
 .footer-line {
     width: min(var(--max), calc(100vw - 40px));
     margin: 0 auto;
     padding: 28px 0 46px;
-    border-top: 1px solid rgba(148,163,184,.14);
+    border-top: 1px solid rgba(226,232,240,.12);
     color: var(--muted);
     display: flex;
     justify-content: space-between;
@@ -761,15 +783,16 @@ html { scroll-behavior: smooth; }
     .hero, .contact-card { grid-template-columns: 1fr; }
     .metric-strip, .proof-grid { grid-template-columns: repeat(2, 1fr); }
     .case-grid, .skills-grid, .edu-grid { grid-template-columns: 1fr; }
-    .system-card { max-width: 650px; }
+    .profile-panel { max-width: 650px; }
 }
 
 @media (max-width: 720px) {
     .nav-inner { height: auto; padding: 14px 0; align-items: flex-start; gap: 12px; flex-direction: column; }
     .nav-links { width: 100%; overflow-x: auto; padding-bottom: 4px; }
+    .ticker-inner { overflow-x: auto; padding: 8px 0; }
     .hero { padding-top: 50px; min-height: auto; }
-    .hero h1 { font-size: clamp(2.55rem, 11vw, 4.4rem); }
-    .architecture-row { grid-template-columns: 1fr; }
+    .hero h1 { font-size: clamp(3rem, 15vw, 4.8rem); }
+    .capability-map { grid-template-columns: 1fr; }
     .metric-strip, .proof-grid { grid-template-columns: 1fr; }
     .section { padding-top: 72px; }
     .timeline-top { flex-direction: column; }
@@ -782,7 +805,7 @@ html { scroll-behavior: smooth; }
 HTML = f"""
 <div class="top-nav">
   <div class="nav-inner">
-    <a class="brand" href="#top"><span class="brand-line"></span><span>Commerce Cloud Portfolio</span></a>
+    <a class="brand" href="#top">Shalini Portfolio</a>
     <nav class="nav-links">
       <a href="#proof">Proof</a>
       <a href="#case-studies">Case Studies</a>
@@ -793,15 +816,30 @@ HTML = f"""
   </div>
 </div>
 
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>60% fewer manual operations</span>
+    <span>78% faster batch processing</span>
+    <span>450+ portal users supported</span>
+    <span>99.95% service availability maintained</span>
+    <span>28% lower p95 API latency</span>
+  </div>
+</div>
+
 <div id="top"></div>
 <section class="hero">
   <div>
-    <div class="eyebrow-pill"><span class="signal"></span> SAP Commerce Cloud - Backend Engineering - B2B Platforms</div>
-    <h1><span class="gradient-text">Building reliable commerce backends</span> for enterprise B2B platforms.</h1>
-    <div class="hero-name">Shalini Pathak - SAP Commerce Cloud Developer</div>
+    <div class="kicker">SAP Commerce Cloud Developer</div>
+    <h1>Shalini <span class="surname">Pathak</span></h1>
+    <div class="hero-title">Backend developer for enterprise commerce platforms.</div>
     <p class="hero-copy">
-      Backend developer with 3+ years of experience delivering SAP Hybris and SAP Commerce Cloud solutions. Focused on OCC APIs, Backoffice workflows, cron-job automation, secure data controls and production reliability for enterprise customer portals.
+      I build SAP Commerce Cloud and SAP Hybris backend solutions across OCC APIs, Backoffice workflows, cron-job automation, data controls and production reliability for B2B customer portals.
     </p>
+    <div class="meta-line">
+      <span class="meta-pill">Associate Software Developer at Collins Aerospace</span>
+      <span class="meta-pill">Bangalore, India</span>
+      <span class="meta-pill">3+ years experience</span>
+    </div>
     <div class="hero-actions">
       <a class="btn btn-primary" href="#case-studies">View case studies</a>
       <a class="btn btn-ghost" href="{resume_href}" download="Shalini_Pathak_Resume.pdf">Download resume</a>
@@ -809,21 +847,19 @@ HTML = f"""
     </div>
   </div>
 
-  <aside class="system-card">
-    <div class="card-header">
-      <div class="window-dots"><span></span><span></span><span></span></div>
-      <div class="card-label">platform profile</div>
+  <aside class="profile-panel">
+    <div class="panel-top">
+      <div class="panel-label">Commerce platform profile</div>
+      <div class="panel-status">Open to backend roles</div>
     </div>
-    <div class="system-body">
-      <div class="platform-title">SAP Commerce delivery across automation, APIs, security and reliability.</div>
-      <div class="architecture-grid">
-        <div class="architecture-row"><strong>Platform</strong><span>SAP Hybris, SAP Commerce Cloud, CCv2, Backoffice, WCMS, Solr</span></div>
-        <div class="architecture-row"><strong>Backend</strong><span>Java, Spring MVC, OCC web services, REST APIs, converters, populators</span></div>
-        <div class="architecture-row"><strong>Delivery</strong><span>CI/CD, Jenkins, Azure DevOps, QA collaboration, quarterly releases</span></div>
-        <div class="architecture-row"><strong>Location</strong><span>Bangalore, India - Associate Software Developer at Collins Aerospace</span></div>
-      </div>
-      <div class="availability-band"><span class="big">99.95%</span><span class="small">service availability maintained while supporting production incidents and release delivery.</span></div>
+    <div class="panel-title">Enterprise B2B systems designed for scale, control and reliability.</div>
+    <div class="capability-map">
+      <div class="capability-card"><strong>Commerce platform</strong><span>SAP Hybris, SAP Commerce Cloud, CCv2, Backoffice, WCMS, Solr and Impex-led migration flows.</span></div>
+      <div class="capability-card"><strong>API engineering</strong><span>Java, Spring MVC, RESTful services and OCC APIs connecting portal features with external systems.</span></div>
+      <div class="capability-card"><strong>Automation</strong><span>Cron jobs, workflow customization and reusable backend components that remove repetitive platform operations.</span></div>
+      <div class="capability-card"><strong>Security controls</strong><span>Role-based access, sensitive-data masking and row-level restrictions for enterprise data workflows.</span></div>
     </div>
+    <div class="availability-card"><strong>99.95%</strong><span>service availability maintained while supporting incidents, release delivery and customer portal performance.</span></div>
   </aside>
 </section>
 
@@ -838,8 +874,8 @@ HTML = f"""
 <section class="section">
   <div class="section-heading">
     <div class="section-eyebrow">Proof over keywords</div>
-    <h2>Not a generic developer profile. A portfolio built around shipped platform outcomes.</h2>
-    <p class="section-subtitle">The structure highlights the business problem, the technical contribution and the measurable result behind each SAP Commerce project.</p>
+    <h2>Built around shipped platform outcomes, not a long keyword list.</h2>
+    <p class="section-subtitle">The portfolio highlights the business problem, the technical contribution and the measurable result behind each SAP Commerce project.</p>
   </div>
   <div class="proof-grid">
     <div class="proof-card"><strong>Commerce automation</strong><p>Hybris customizations, cron jobs, Impex scripts and Backoffice workflows built to reduce repetitive manual operations.</p></div>
@@ -897,8 +933,8 @@ HTML = f"""
   <div class="skills-grid">
     <div class="skill-card"><div class="skill-title"><span class="skill-badge">SAP</span><h3>SAP Commerce Cloud</h3></div><div class="chips"><span class="chip">Hybris Core Architecture</span><span class="chip">CCv2</span><span class="chip">OCC / Headless</span><span class="chip">Backoffice Customization</span><span class="chip">WCMS</span><span class="chip">Impex</span><span class="chip">Cron Jobs</span><span class="chip">Solr</span><span class="chip">Hot Folder</span><span class="chip">Populators & Converters</span><span class="chip">Events</span><span class="chip">Interceptors</span><span class="chip">Restrictions</span><span class="chip">Cart & Checkout</span></div></div>
     <div class="skill-card"><div class="skill-title"><span class="skill-badge">API</span><h3>Backend Engineering</h3></div><div class="chips"><span class="chip">Java</span><span class="chip">Spring MVC</span><span class="chip">Spring Hibernate</span><span class="chip">RESTful APIs</span><span class="chip">Microservices Architecture</span><span class="chip">System Design</span><span class="chip">Performance Optimization</span><span class="chip">Code Review</span></div></div>
-    <div class="skill-card"><div class="skill-title"><span class="skill-badge">SEC</span><h3>Data and Security</h3></div><div class="chips"><span class="chip">SQL</span><span class="chip">MySQL</span><span class="chip">Oracle</span><span class="chip">DBMS / RDBMS</span><span class="chip">Data Modeling</span><span class="chip">RBAC</span><span class="chip">PII Masking</span><span class="chip">Row-level Security</span><span class="chip">JSON</span><span class="chip">XML</span></div></div>
-    <div class="skill-card"><div class="skill-title"><span class="skill-badge">OPS</span><h3>DevOps and Tools</h3></div><div class="chips"><span class="chip">Git</span><span class="chip">Jenkins</span><span class="chip">Azure DevOps</span><span class="chip">CI/CD Pipelines</span><span class="chip">Eclipse</span><span class="chip">IntelliJ IDEA</span><span class="chip">Agile Delivery</span><span class="chip">QA Collaboration</span></div></div>
+    <div class="skill-card"><div class="skill-title"><span class="skill-badge">Data</span><h3>Data and Security</h3></div><div class="chips"><span class="chip">SQL</span><span class="chip">MySQL</span><span class="chip">Oracle</span><span class="chip">DBMS / RDBMS</span><span class="chip">Data Modeling</span><span class="chip">RBAC</span><span class="chip">PII Masking</span><span class="chip">Row-level Security</span><span class="chip">JSON</span><span class="chip">XML</span></div></div>
+    <div class="skill-card"><div class="skill-title"><span class="skill-badge">Ops</span><h3>DevOps and Tools</h3></div><div class="chips"><span class="chip">Git</span><span class="chip">Jenkins</span><span class="chip">Azure DevOps</span><span class="chip">CI/CD Pipelines</span><span class="chip">Eclipse</span><span class="chip">IntelliJ IDEA</span><span class="chip">Agile Delivery</span><span class="chip">QA Collaboration</span></div></div>
   </div>
 </section>
 
@@ -949,15 +985,13 @@ HTML = f"""
 </div>
 
 <div class="footer-line">
-  <span>Shalini Pathak - SAP Commerce Cloud Developer</span>
+  <span>SAP Commerce Cloud portfolio</span>
   <span>Built with Streamlit</span>
 </div>
 """
 
 
 def render_html(markup: str) -> None:
-    # Streamlit's Markdown engine treats 4-space indented HTML as a code block.
-    # Left-stripping each line prevents raw tags from appearing on the live site.
     cleaned = "\n".join(line.lstrip() for line in markup.splitlines() if line.strip())
     st.markdown(cleaned, unsafe_allow_html=True)
 
