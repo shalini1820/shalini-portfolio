@@ -199,7 +199,7 @@ html { scroll-behavior: smooth; }
     margin: 24px 0 0;
     max-width: 760px;
     color: white;
-    font-size: clamp(1.9rem, 3.45vw, 3.75rem);
+    font-size: clamp(2.2rem, 3.85vw, 4.5rem);
     line-height: 1.12;
     letter-spacing: -.035em;
     font-weight: 900;
