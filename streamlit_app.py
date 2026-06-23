@@ -196,7 +196,7 @@ html { scroll-behavior: smooth; }
 }
 
 .hero h1 {
-    margin: 24px 0 0;
+    margin: 26px 0 0;
     max-width: 760px;
     color: white;
     font-size: clamp(2.2rem, 3.85vw, 4.5rem);
